@@ -1,0 +1,24 @@
+/* Alerts styling */
+
+.Alert-header {
+  color: black;
+  font-size: 0.75em
+}
+
+.Alert-title {
+  font-size: 1em;
+  font-weight: bold;
+} 
+
+.Alert-item {
+  border-bottom: 1px solid #ccc;
+}
+
+.on {
+  background: red;
+}
+
+.nolist {
+  list-style: none;
+  color: #000;
+}

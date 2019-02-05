@@ -267,3 +267,32 @@ p .fontStyle {
   border: solid #ccc;
   border-width: 1px 1px 0 1px;
 }
+
+/* Alerts styling */
+/* line 173, ../../sass/partials/_main.sass */
+.Alert-header {
+  color: black;
+  font-size: 0.75em;
+}
+
+/* line 177, ../../sass/partials/_main.sass */
+.Alert-title {
+  font-size: 1em;
+  font-weight: bold;
+}
+
+/* line 181, ../../sass/partials/_main.sass */
+.Alert-item {
+  border-bottom: 1px solid #ccc;
+}
+
+/* line 184, ../../sass/partials/_main.sass */
+.on {
+  background: red;
+}
+
+/* line 187, ../../sass/partials/_main.sass */
+.nolist {
+  list-style: none;
+  color: #000;
+}

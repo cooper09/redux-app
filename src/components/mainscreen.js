@@ -7,7 +7,7 @@ import { bindActionCreators } from 'redux';
 
 import { firstScreen, secondScreen, thirdScreen, fourthScreen, newNotification } from '../actions/index';
 
-
+import Table from '../containers/Table.js';
 
 class MainScreen extends React.Component {
     constructor(props){
@@ -34,13 +34,13 @@ class MainScreen extends React.Component {
         console.log("Main Screen is off");
      return false;
    }
-
+      console.log("MainScreen - alerts: ", this.props.alerts );
       return (
         <div className='center option animated fadeIn mainScrn'><br/><br/> 
                     
           <button className="closeBtn" onClick={()=> this.props.closeScreen("Close Screen")}>Logout</button>
           <br/><br/>
-          
+          <Table />
         </div>
       
       )
