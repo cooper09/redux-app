@@ -7,7 +7,9 @@ import { bindActionCreators } from 'redux';
 
 import { firstScreen, secondScreen, thirdScreen, fourthScreen, newNotification } from '../actions/index';
 
-import Table from '../containers/Table.js';
+//import Table from '../containers/Table.js';
+//import {Table} from '../containers/simpleTable2.js';
+import Table from '../containers/uiTable'
 
 class MainScreen extends React.Component {
     constructor(props){
