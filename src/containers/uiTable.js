@@ -33,6 +33,10 @@ const rows = [
   createData('Gingerbread', 356, 16.0, 49, 3.9),
 ];
 
+function row () {
+  console.log('Create a row...');
+  //return "This is a new row"
+}
 
 function SimpleTable(props) {
   const { classes } = props;
@@ -54,13 +58,13 @@ function SimpleTable(props) {
                 </TableCell>
               )
             }
-
-
           </TableRow>
         </TableHead>
         <TableBody>
 
-          { /*
+          { 
+            data.map(row)
+            /*
             rows.map(row => (
             <TableRow key={row.id}>
               <TableCell component="th" scope="row">

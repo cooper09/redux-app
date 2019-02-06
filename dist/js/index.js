@@ -44773,6 +44773,11 @@ function createData(name, calories, fat, carbs, stinky) {
 
 var rows = [createData('Frozen yoghurt goodies', 159, 6.0, 24, 4.0), createData('Ice cream sandwich', 237, 9.0, 37, 4.3), createData('Eclair', 262, 16.0, 24, 6.0), createData('Cupcake', 305, 3.7, 67, 4.3), createData('Gingerbread', 356, 16.0, 49, 3.9)];
 
+function row() {
+  console.log('Create a row...');
+  //return "This is a new row"
+}
+
 function SimpleTable(props) {
   var classes = props.classes;
   var headers = props.headers;
@@ -44803,7 +44808,24 @@ function SimpleTable(props) {
           })
         )
       ),
-      _react2.default.createElement(_TableBody2.default, null)
+      _react2.default.createElement(
+        _TableBody2.default,
+        null,
+        data.map(row)
+        /*
+        rows.map(row => (
+        <TableRow key={row.id}>
+          <TableCell component="th" scope="row">
+            {row.name}
+          </TableCell>
+          <TableCell align="right">{row.calories}</TableCell>
+          <TableCell align="right">{row.fat}</TableCell>
+          <TableCell align="right">{row.carbs}</TableCell>
+          <TableCell align="right">{row.stinky}</TableCell>
+        </TableRow>
+        ))
+        */
+      )
     )
   );
 }
