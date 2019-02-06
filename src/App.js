@@ -51,7 +51,7 @@ componentWillMount() {
   render() {
     return (
       <div className="App">
-        <div>Master View Controller (MVC) v.0.0.2</div>
+        <div>Master View Controller (MVC) v.0.0.2 a</div>
         <div>Currently using React {React.version}</div>
         <br/><br/>
         <Login onLogin={ event =>{

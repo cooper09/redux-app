@@ -45,12 +45,36 @@ class MainScreen extends React.Component {
    }
       console.log("MainScreen - alerts: ", this.props.alerts );
       console.log("MainScreen - current data: ", this.state.data );
+
+      const testData = [
+        {
+          name: "One",
+          prop: "one"
+        },
+        {
+          name: "Two",
+          prop: "two"
+        },
+        {
+          name: "Five",
+          prop: "five"
+        },
+        {
+          name: "Seven",
+          prop: "seven"
+        },
+        { 
+          name: "Nine",
+          prop: "ten"
+        }
+      ];
+
       return (
         <div className='center option animated fadeIn mainScrn'><br/><br/> 
-                    
+                 
           <button className="closeBtn" onClick={()=> this.props.closeScreen("Close Screen")}>Logout</button>
           <br/><br/>
-          <button onClick={()=> this.onSubmit("Test 123") } >Add Alert</button>
+          <button onClick={()=> this.onSubmit(testData) } >Add Alert</button>
           <br/><br/>
           <Table  data={this.state.data}  headers={[
             {

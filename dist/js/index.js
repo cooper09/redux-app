@@ -44295,7 +44295,7 @@ var App = function (_Component) {
         _react2.default.createElement(
           'div',
           null,
-          'Master View Controller (MVC) v.0.0.2'
+          'Master View Controller (MVC) v.0.0.2 a'
         ),
         _react2.default.createElement(
           'div',
@@ -44640,6 +44640,24 @@ var MainScreen = function (_React$Component) {
       }
       console.log("MainScreen - alerts: ", this.props.alerts);
       console.log("MainScreen - current data: ", this.state.data);
+
+      var testData = [{
+        name: "One",
+        prop: "one"
+      }, {
+        name: "Two",
+        prop: "two"
+      }, {
+        name: "Five",
+        prop: "five"
+      }, {
+        name: "Seven",
+        prop: "seven"
+      }, {
+        name: "Nine",
+        prop: "ten"
+      }];
+
       return _react2.default.createElement(
         'div',
         { className: 'center option animated fadeIn mainScrn' },
@@ -44657,7 +44675,7 @@ var MainScreen = function (_React$Component) {
         _react2.default.createElement(
           'button',
           { onClick: function onClick() {
-              return _this2.onSubmit("Test 123");
+              return _this2.onSubmit(testData);
             } },
           'Add Alert'
         ),
@@ -44773,9 +44791,20 @@ function createData(name, calories, fat, carbs, stinky) {
 
 var rows = [createData('Frozen yoghurt goodies', 159, 6.0, 24, 4.0), createData('Ice cream sandwich', 237, 9.0, 37, 4.3), createData('Eclair', 262, 16.0, 24, 6.0), createData('Cupcake', 305, 3.7, 67, 4.3), createData('Gingerbread', 356, 16.0, 49, 3.9)];
 
-function row() {
-  console.log('Create a row...');
-  //return "This is a new row"
+function row(x, i, header) {
+  console.log('Create a row x: ', x, " i: ", i, " headers: ", header);
+  var dataArr = x;
+  return _react2.default.createElement(
+    _TableRow2.default,
+    { key: 'tr-' + i },
+    dataArr.map(function (y, k) {
+      return _react2.default.createElement(
+        _TableCell2.default,
+        { key: 'trc-' + k },
+        y.prop
+      );
+    })
+  );
 }
 
 function SimpleTable(props) {
@@ -44802,7 +44831,7 @@ function SimpleTable(props) {
           headers.map(function (x, i) {
             return _react2.default.createElement(
               _TableCell2.default,
-              { key: i },
+              { key: 'thc-' + i },
               x.name
             );
           })
@@ -44811,20 +44840,18 @@ function SimpleTable(props) {
       _react2.default.createElement(
         _TableBody2.default,
         null,
-        data.map(row)
-        /*
-        rows.map(row => (
-        <TableRow key={row.id}>
-          <TableCell component="th" scope="row">
-            {row.name}
-          </TableCell>
-          <TableCell align="right">{row.calories}</TableCell>
-          <TableCell align="right">{row.fat}</TableCell>
-          <TableCell align="right">{row.carbs}</TableCell>
-          <TableCell align="right">{row.stinky}</TableCell>
-        </TableRow>
-        ))
-        */
+        data.map(function (x, i) {
+          return row(x, i, headers);
+        }),
+        _react2.default.createElement(
+          _TableRow2.default,
+          null,
+          _react2.default.createElement(
+            _TableCell2.default,
+            null,
+            'End of Table'
+          )
+        )
       )
     )
   );

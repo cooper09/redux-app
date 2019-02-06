@@ -33,10 +33,19 @@ const rows = [
   createData('Gingerbread', 356, 16.0, 49, 3.9),
 ];
 
-function row () {
-  console.log('Create a row...');
-  //return "This is a new row"
-}
+function row ( x,i, header) {
+  console.log('Create a row x: ', x, " i: ", i, " headers: ", header );
+  const dataArr = x;
+  return (<TableRow key={`tr-${i}`}>
+    {
+      dataArr.map((y,k) => (
+        <TableCell key={`trc-${k}`}>
+           {y.prop}
+        </TableCell>
+      ))
+    }
+  </TableRow>
+  )}
 
 function SimpleTable(props) {
   const { classes } = props;
@@ -53,7 +62,7 @@ function SimpleTable(props) {
           <TableRow>
             {
               headers.map( (x, i) => 
-                <TableCell key={i} >
+                <TableCell key={`thc-${i}`} >
                   {x.name}
                 </TableCell>
               )
@@ -63,20 +72,11 @@ function SimpleTable(props) {
         <TableBody>
 
           { 
-            data.map(row)
-            /*
-            rows.map(row => (
-            <TableRow key={row.id}>
-              <TableCell component="th" scope="row">
-                {row.name}
-              </TableCell>
-              <TableCell align="right">{row.calories}</TableCell>
-              <TableCell align="right">{row.fat}</TableCell>
-              <TableCell align="right">{row.carbs}</TableCell>
-              <TableCell align="right">{row.stinky}</TableCell>
+            data.map((x, i) => row(x,i, headers))
+          } 
+            <TableRow>
+             <TableCell>End of Table</TableCell>
             </TableRow>
-          ))
-            */ } 
         </TableBody>
       </Table>
     </Paper>
