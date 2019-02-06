@@ -21,7 +21,8 @@ class MainScreen extends React.Component {
           opList: [],
           notification: {
             "test" : "data "
-          }
+          },
+          data: []
         }//end state
       }//end constructor
 
@@ -29,20 +30,58 @@ class MainScreen extends React.Component {
       
       }//end componentWillMount
     
-   render() {
+      onSubmit(newData) {
+        alert("time for Action: " + newData);
+        this.setState({
+          data: [...this.state.data, newData]
+        })
+      }
 
+      render() {
 
     if (this.props.screen != 'Main Screen') {
         console.log("Main Screen is off");
      return false;
    }
       console.log("MainScreen - alerts: ", this.props.alerts );
+      console.log("MainScreen - current data: ", this.state.data );
       return (
         <div className='center option animated fadeIn mainScrn'><br/><br/> 
                     
           <button className="closeBtn" onClick={()=> this.props.closeScreen("Close Screen")}>Logout</button>
           <br/><br/>
-          <Table />
+          <button onClick={()=> this.onSubmit("Test 123") } >Add Alert</button>
+          <br/><br/>
+          <Table  data={this.state.data}  headers={[
+            {
+              name: "Alarm time",
+              prop: 'alarmTime'
+            },
+            {
+              name: "Building",
+              prop: 'building'
+            },
+            {
+              name: "Doorstation",
+              prop: 'doorStation'
+            },
+            {
+              name: "Operator",
+              prop: 'operator'
+            },
+            {
+              name: "Attended",
+              prop: 'attended'
+            },
+            {
+              name: "Duration",
+              prop: 'duration'
+            },
+            {
+              name: "Alarm type",
+              prop: 'alarmType'
+            },
+          ]} />
         </div>
       
       )

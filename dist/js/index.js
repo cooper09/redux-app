@@ -44564,7 +44564,7 @@ exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
-    value: true
+  value: true
 });
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -44585,6 +44585,8 @@ var _uiTable2 = _interopRequireDefault(_uiTable);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -44596,73 +44598,113 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 
 var MainScreen = function (_React$Component) {
-    _inherits(MainScreen, _React$Component);
+  _inherits(MainScreen, _React$Component);
 
-    function MainScreen(props) {
-        _classCallCheck(this, MainScreen);
+  function MainScreen(props) {
+    _classCallCheck(this, MainScreen);
 
-        var _this = _possibleConstructorReturn(this, (MainScreen.__proto__ || Object.getPrototypeOf(MainScreen)).call(this, props));
+    var _this = _possibleConstructorReturn(this, (MainScreen.__proto__ || Object.getPrototypeOf(MainScreen)).call(this, props));
 
-        _this.state = {
-            endpoint: "http://192.168.2.17:7250/",
-            dataList: [],
-            logList: [],
-            opList: [],
-            notification: {
-                "test": "data "
-            } //end state
-        };return _this;
-    } //end constructor
+    _this.state = {
+      endpoint: "http://192.168.2.17:7250/",
+      dataList: [],
+      logList: [],
+      opList: [],
+      notification: {
+        "test": "data "
+      },
+      data: [] //end state
+    };return _this;
+  } //end constructor
 
-    _createClass(MainScreen, [{
-        key: 'componentWillMount',
-        value: function componentWillMount() {} //end componentWillMount
+  _createClass(MainScreen, [{
+    key: 'componentWillMount',
+    value: function componentWillMount() {} //end componentWillMount
 
-    }, {
-        key: 'render',
-        value: function render() {
-            var _this2 = this;
+  }, {
+    key: 'onSubmit',
+    value: function onSubmit(newData) {
+      alert("time for Action: " + newData);
+      this.setState({
+        data: [].concat(_toConsumableArray(this.state.data), [newData])
+      });
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var _this2 = this;
 
-            if (this.props.screen != 'Main Screen') {
-                console.log("Main Screen is off");
-                return false;
-            }
-            console.log("MainScreen - alerts: ", this.props.alerts);
-            return _react2.default.createElement(
-                'div',
-                { className: 'center option animated fadeIn mainScrn' },
-                _react2.default.createElement('br', null),
-                _react2.default.createElement('br', null),
-                _react2.default.createElement(
-                    'button',
-                    { className: 'closeBtn', onClick: function onClick() {
-                            return _this2.props.closeScreen("Close Screen");
-                        } },
-                    'Logout'
-                ),
-                _react2.default.createElement('br', null),
-                _react2.default.createElement('br', null),
-                _react2.default.createElement(_uiTable2.default, null)
-            );
-        } //end render
+      if (this.props.screen != 'Main Screen') {
+        console.log("Main Screen is off");
+        return false;
+      }
+      console.log("MainScreen - alerts: ", this.props.alerts);
+      console.log("MainScreen - current data: ", this.state.data);
+      return _react2.default.createElement(
+        'div',
+        { className: 'center option animated fadeIn mainScrn' },
+        _react2.default.createElement('br', null),
+        _react2.default.createElement('br', null),
+        _react2.default.createElement(
+          'button',
+          { className: 'closeBtn', onClick: function onClick() {
+              return _this2.props.closeScreen("Close Screen");
+            } },
+          'Logout'
+        ),
+        _react2.default.createElement('br', null),
+        _react2.default.createElement('br', null),
+        _react2.default.createElement(
+          'button',
+          { onClick: function onClick() {
+              return _this2.onSubmit("Test 123");
+            } },
+          'Add Alert'
+        ),
+        _react2.default.createElement('br', null),
+        _react2.default.createElement('br', null),
+        _react2.default.createElement(_uiTable2.default, { data: this.state.data, headers: [{
+            name: "Alarm time",
+            prop: 'alarmTime'
+          }, {
+            name: "Building",
+            prop: 'building'
+          }, {
+            name: "Doorstation",
+            prop: 'doorStation'
+          }, {
+            name: "Operator",
+            prop: 'operator'
+          }, {
+            name: "Attended",
+            prop: 'attended'
+          }, {
+            name: "Duration",
+            prop: 'duration'
+          }, {
+            name: "Alarm type",
+            prop: 'alarmType'
+          }] })
+      );
+    } //end render
 
-    }]);
+  }]);
 
-    return MainScreen;
+  return MainScreen;
 }(_react2.default.Component); //end component
 
 
 function mapStateToProps(state) {
-    console.log("MainScreen - current state to map: ", state);
-    return {
-        data: state.mydata,
-        screen: state.screen
-    };
+  console.log("MainScreen - current state to map: ", state);
+  return {
+    data: state.mydata,
+    screen: state.screen
+  };
 } //end mapStateToProps
 
 
 function mapDispatchToProps(dispatch) {
-    return (0, _redux.bindActionCreators)({ firstScreen: _index.firstScreen, secondScreen: _index.secondScreen, thirdScreen: _index.thirdScreen, fourthScreen: _index.fourthScreen, newNotification: _index.newNotification, closeScreen: _index.closeScreen }, dispatch);
+  return (0, _redux.bindActionCreators)({ firstScreen: _index.firstScreen, secondScreen: _index.secondScreen, thirdScreen: _index.thirdScreen, fourthScreen: _index.fourthScreen, newNotification: _index.newNotification, closeScreen: _index.closeScreen }, dispatch);
 } //end mapDispatchToProps
 
 exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(MainScreen);
@@ -44724,16 +44766,21 @@ var styles = function styles(theme) {
 };
 
 var id = 0;
-function createData(name, calories, fat, carbs, protein) {
+function createData(name, calories, fat, carbs, stinky) {
   id += 1;
-  return { id: id, name: name, calories: calories, fat: fat, carbs: carbs, protein: protein };
+  return { id: id, name: name, calories: calories, fat: fat, carbs: carbs, stinky: stinky };
 }
 
-var rows = [createData('Frozen yoghurt', 159, 6.0, 24, 4.0), createData('Ice cream sandwich', 237, 9.0, 37, 4.3), createData('Eclair', 262, 16.0, 24, 6.0), createData('Cupcake', 305, 3.7, 67, 4.3), createData('Gingerbread', 356, 16.0, 49, 3.9)];
+var rows = [createData('Frozen yoghurt goodies', 159, 6.0, 24, 4.0), createData('Ice cream sandwich', 237, 9.0, 37, 4.3), createData('Eclair', 262, 16.0, 24, 6.0), createData('Cupcake', 305, 3.7, 67, 4.3), createData('Gingerbread', 356, 16.0, 49, 3.9)];
 
 function SimpleTable(props) {
   var classes = props.classes;
+  var headers = props.headers;
+  var data = props.data;
 
+
+  console.log("SimpleTable headers: ", headers);
+  console.log("SimpleTable data: ", data);
 
   return _react2.default.createElement(
     _Paper2.default,
@@ -44747,74 +44794,24 @@ function SimpleTable(props) {
         _react2.default.createElement(
           _TableRow2.default,
           null,
-          _react2.default.createElement(
-            _TableCell2.default,
-            null,
-            'Dessert (100g serving)'
-          ),
-          _react2.default.createElement(
-            _TableCell2.default,
-            { align: 'right' },
-            'Calories'
-          ),
-          _react2.default.createElement(
-            _TableCell2.default,
-            { align: 'right' },
-            'Fat (g)'
-          ),
-          _react2.default.createElement(
-            _TableCell2.default,
-            { align: 'right' },
-            'Carbs (g)'
-          ),
-          _react2.default.createElement(
-            _TableCell2.default,
-            { align: 'right' },
-            'Protein (g)'
-          )
+          headers.map(function (x, i) {
+            return _react2.default.createElement(
+              _TableCell2.default,
+              { key: i },
+              x.name
+            );
+          })
         )
       ),
-      _react2.default.createElement(
-        _TableBody2.default,
-        null,
-        rows.map(function (row) {
-          return _react2.default.createElement(
-            _TableRow2.default,
-            { key: row.id },
-            _react2.default.createElement(
-              _TableCell2.default,
-              { component: 'th', scope: 'row' },
-              row.name
-            ),
-            _react2.default.createElement(
-              _TableCell2.default,
-              { align: 'right' },
-              row.calories
-            ),
-            _react2.default.createElement(
-              _TableCell2.default,
-              { align: 'right' },
-              row.fat
-            ),
-            _react2.default.createElement(
-              _TableCell2.default,
-              { align: 'right' },
-              row.carbs
-            ),
-            _react2.default.createElement(
-              _TableCell2.default,
-              { align: 'right' },
-              row.protein
-            )
-          );
-        })
-      )
+      _react2.default.createElement(_TableBody2.default, null)
     )
   );
 }
 
 SimpleTable.propTypes = {
-  classes: _propTypes2.default.object.isRequired
+  classes: _propTypes2.default.object.isRequired,
+  headers: _propTypes2.default.array,
+  data: _propTypes2.default.array
 };
 
 exports.default = (0, _styles.withStyles)(styles)(SimpleTable);
