@@ -38,9 +38,9 @@ function row ( x,i, header) {
   const dataArr = x;
   return (<TableRow key={`tr-${i}`}>
     {
-      dataArr.map((y,k) => (
+      x.map((y,k) => (
         <TableCell key={`trc-${k}`}>
-           {y.prop}
+           {y.name}
         </TableCell>
       ))
     }

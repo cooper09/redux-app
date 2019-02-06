@@ -44295,12 +44295,12 @@ var App = function (_Component) {
         _react2.default.createElement(
           'div',
           null,
-          'Master View Controller (MVC) v.0.0.2 a'
+          'Master View Controller (MVC) v.0.0.2'
         ),
         _react2.default.createElement(
           'div',
           null,
-          'Currently using React ',
+          'Currently using React  ',
           _react2.default.version
         ),
         _react2.default.createElement('br', null),
@@ -44797,11 +44797,11 @@ function row(x, i, header) {
   return _react2.default.createElement(
     _TableRow2.default,
     { key: 'tr-' + i },
-    dataArr.map(function (y, k) {
+    x.map(function (y, k) {
       return _react2.default.createElement(
         _TableCell2.default,
         { key: 'trc-' + k },
-        y.prop
+        y.name
       );
     })
   );
