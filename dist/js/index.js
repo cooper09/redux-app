@@ -44289,13 +44289,14 @@ var App = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
+      console.log("App - state: ", this.props.state);
       return _react2.default.createElement(
         'div',
         { className: 'App' },
         _react2.default.createElement(
           'div',
           null,
-          'Master View Controller (MVC) v.0.0.2b'
+          'Master View Controller (MVC) v.0.0.2f'
         ),
         _react2.default.createElement(
           'div',
@@ -44320,7 +44321,7 @@ var App = function (_Component) {
 
 exports.default = App;
 
-},{"./components/login.js":254,"./components/mainscreen.js":255,"./utils/getBuildingData.js":261,"./utils/getLogData.js":262,"./utils/getOpsData.js":263,"react":210}],253:[function(require,module,exports){
+},{"./components/login.js":254,"./components/mainscreen.js":255,"./utils/getBuildingData.js":262,"./utils/getLogData.js":263,"./utils/getOpsData.js":264,"react":210}],253:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -44701,7 +44702,7 @@ var MainScreen = function (_React$Component) {
         ),
         _react2.default.createElement('br', null),
         _react2.default.createElement('br', null),
-        _react2.default.createElement(_uiTable2.default, { data: this.state.data, headers: [{
+        _react2.default.createElement(_uiTable2.default, { data: this.state.data, alert: this.props.data, headers: [{
             name: "Alarm time",
             prop: 'alarmTime'
           }, {
@@ -44788,6 +44789,10 @@ var _Paper = require('@material-ui/core/Paper');
 
 var _Paper2 = _interopRequireDefault(_Paper);
 
+var _convertData = require('../utils/convertData');
+
+var _convertData2 = _interopRequireDefault(_convertData);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var styles = function styles(theme) {
@@ -44831,10 +44836,16 @@ function SimpleTable(props) {
   var classes = props.classes;
   var headers = props.headers;
   var data = props.data;
+  var alert = props.alert;
 
 
   console.log("SimpleTable headers: ", headers);
   console.log("SimpleTable data: ", data);
+  console.log("SimpleTable alert: ", alert);
+
+  if (alert.result != undefined) {
+    console.log("Yumpin Yimminy!");
+  }
 
   return _react2.default.createElement(
     _Paper2.default,
@@ -44885,7 +44896,7 @@ SimpleTable.propTypes = {
 
 exports.default = (0, _styles.withStyles)(styles)(SimpleTable);
 
-},{"@material-ui/core/Paper":16,"@material-ui/core/Table":20,"@material-ui/core/TableBody":22,"@material-ui/core/TableCell":24,"@material-ui/core/TableHead":26,"@material-ui/core/TableRow":28,"@material-ui/core/styles":45,"prop-types":182,"react":210}],257:[function(require,module,exports){
+},{"../utils/convertData":261,"@material-ui/core/Paper":16,"@material-ui/core/Table":20,"@material-ui/core/TableBody":22,"@material-ui/core/TableCell":24,"@material-ui/core/TableHead":26,"@material-ui/core/TableRow":28,"@material-ui/core/styles":45,"prop-types":182,"react":210}],257:[function(require,module,exports){
 'use strict';
 
 var _react = require('react');
@@ -45027,6 +45038,19 @@ var screenReducer = function screenReducer() {
 exports.default = screenReducer;
 
 },{}],261:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+   value: true
+});
+exports.convertData = convertData;
+
+
+function convertData() {
+   alert("convertData");
+}
+
+},{}],262:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -45056,7 +45080,7 @@ function getBuildingData() {
   });
 }
 
-},{"axios":68}],262:[function(require,module,exports){
+},{"axios":68}],263:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -45086,7 +45110,7 @@ function getLogData() {
   });
 }
 
-},{"axios":68}],263:[function(require,module,exports){
+},{"axios":68}],264:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {

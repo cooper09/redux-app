@@ -8,6 +8,8 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 
+import convertData from '../utils/convertData'
+
 const styles = theme => ({
   root: {
     width: '100%',
@@ -51,9 +53,16 @@ function SimpleTable(props) {
   const { classes } = props;
   const { headers } = props;
   const { data } = props;
+  const { alert } = props;
 
   console.log("SimpleTable headers: ", headers );
   console.log("SimpleTable data: ", data );
+  console.log("SimpleTable alert: ", alert);
+
+  if (alert.result  != undefined ) {
+    console.log("Yumpin Yimminy!");
+
+  }
 
   return (
     <Paper className={classes.root}>
