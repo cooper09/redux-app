@@ -44295,7 +44295,7 @@ var App = function (_Component) {
         _react2.default.createElement(
           'div',
           null,
-          'Master View Controller (MVC) v.0.0.2'
+          'Master View Controller (MVC) v.0.0.2b'
         ),
         _react2.default.createElement(
           'div',
@@ -44334,6 +44334,7 @@ exports.thirdScreen = thirdScreen;
 exports.newNotification = newNotification;
 exports.fourthScreen = fourthScreen;
 exports.closeScreen = closeScreen;
+exports.newAlert = newAlert;
 
 /* 
 Actions File 
@@ -44419,6 +44420,16 @@ function closeScreen(data) {
     };
 } //end closeScreen
 
+//New Section strictly for MVC
+function newAlert(data) {
+    alert('Actions Notify - New Alert', data);
+    //an action needs to return an action
+    return {
+        type: 'NEW_ALERT',
+        payload: data
+    };
+}
+
 },{}],254:[function(require,module,exports){
 'use strict';
 
@@ -44496,11 +44507,11 @@ var LoginComponent = function (_Component) {
       console.log("our endpoint: ", endpoint);
       var socket = (0, _socket2.default)(endpoint);
       socket.on("message", function (data) {
-        //alert("Received Message - Index: "+ data )
+        alert("Login Received Message - Index: " + data);
         _this2.setState({
           response: data
         });
-        _this2.testNotify(data);
+        _this2.props.store.dispatch({ type: "NEW_ALERT", payload: data });;
       });
 
       console.log("component did mount: ", this.state.response);
@@ -44575,9 +44586,13 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRedux = require('react-redux');
 
-var _index = require('../actions/index');
-
 var _redux = require('redux');
+
+var _socket = require('socket.io-client');
+
+var _socket2 = _interopRequireDefault(_socket);
+
+var _index = require('../actions/index');
 
 var _uiTable = require('../containers/uiTable');
 
@@ -44593,8 +44608,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-//import Table from '../containers/Table.js';
-//import {Table} from '../containers/simpleTable2.js';
+//Socket To Em!
 
 
 var MainScreen = function (_React$Component) {
@@ -44606,13 +44620,10 @@ var MainScreen = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (MainScreen.__proto__ || Object.getPrototypeOf(MainScreen)).call(this, props));
 
     _this.state = {
-      endpoint: "http://192.168.2.17:7250/",
+      endpoint: "http://104.248.110.70:3000",
       dataList: [],
       logList: [],
       opList: [],
-      notification: {
-        "test": "data "
-      },
       data: [] //end state
     };return _this;
   } //end constructor
@@ -44621,10 +44632,11 @@ var MainScreen = function (_React$Component) {
     key: 'componentWillMount',
     value: function componentWillMount() {} //end componentWillMount
 
+
   }, {
     key: 'onSubmit',
     value: function onSubmit(newData) {
-      alert("time for Action: " + newData);
+      //alert("time for Action: " + newData);
       this.setState({
         data: [].concat(_toConsumableArray(this.state.data), [newData])
       });
@@ -44640,6 +44652,7 @@ var MainScreen = function (_React$Component) {
       }
       console.log("MainScreen - alerts: ", this.props.alerts);
       console.log("MainScreen - current data: ", this.state.data);
+      console.log("MainScreen - data store: ", this.props.data);
 
       var currentTime = new Date().toLocaleString();
       var testData = [{
@@ -44729,12 +44742,12 @@ function mapStateToProps(state) {
 
 
 function mapDispatchToProps(dispatch) {
-  return (0, _redux.bindActionCreators)({ firstScreen: _index.firstScreen, secondScreen: _index.secondScreen, thirdScreen: _index.thirdScreen, fourthScreen: _index.fourthScreen, newNotification: _index.newNotification, closeScreen: _index.closeScreen }, dispatch);
+  return (0, _redux.bindActionCreators)({ firstScreen: _index.firstScreen, secondScreen: _index.secondScreen, thirdScreen: _index.thirdScreen, fourthScreen: _index.fourthScreen, newAlert: _index.newAlert, closeScreen: _index.closeScreen }, dispatch);
 } //end mapDispatchToProps
 
 exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(MainScreen);
 
-},{"../actions/index":253,"../containers/uiTable":256,"react":210,"react-redux":192,"redux":216}],256:[function(require,module,exports){
+},{"../actions/index":253,"../containers/uiTable":256,"react":210,"react-redux":192,"redux":216,"socket.io-client":234}],256:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -44926,8 +44939,8 @@ var dataReducer = function dataReducer() {
     console.log('Get DataReducer: ', action);
 
     switch (action.type) {
-        case 'NEW_NOTIFY':
-            console.log('NEW Notification payload: ', action.payload);
+        case 'NEW_ALERT':
+            console.log('NEW Alert payload: ', action.payload);
             return action.payload;
             break;
     }

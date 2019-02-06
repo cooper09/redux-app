@@ -42,11 +42,11 @@ class LoginComponent extends Component {
     console.log("our endpoint: ", endpoint );
     const socket = socketIOClient(endpoint);
     socket.on("message", data => {
-      //alert("Received Message - Index: "+ data )
+      alert("Login Received Message - Index: "+ data )
       this.setState({
          response: data 
       });
-      this.testNotify(data);
+      this.props.store.dispatch({type: "NEW_ALERT", payload: data });;
   });
 
     console.log("component did mount: ", this.state.response  );

@@ -10,8 +10,8 @@ const dataReducer = (state=initialState, action) => {
     console.log('Get DataReducer: ', action )
 
     switch(action.type) {
-        case 'NEW_NOTIFY':
-            console.log('NEW Notification payload: ', action.payload );
+        case 'NEW_ALERT':
+            console.log('NEW Alert payload: ', action.payload );
             return action.payload;
         break;
     }

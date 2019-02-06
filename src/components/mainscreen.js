@@ -1,27 +1,24 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { closeScreen } from '../actions/index';
-
 import { bindActionCreators } from 'redux';
 
-import { firstScreen, secondScreen, thirdScreen, fourthScreen, newNotification } from '../actions/index';
+//Socket To Em!
+import socketIOClient from "socket.io-client";
 
-//import Table from '../containers/Table.js';
-//import {Table} from '../containers/simpleTable2.js';
+import { firstScreen, secondScreen, thirdScreen, fourthScreen, closeScreen } from '../actions/index';
+import { newAlert } from '../actions/index';
+
 import Table from '../containers/uiTable'
 
 class MainScreen extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-          endpoint: "http://192.168.2.17:7250/",
+          endpoint: "http://104.248.110.70:3000",
           dataList: [],
           logList: [],
           opList: [],
-          notification: {
-            "test" : "data "
-          },
           data: []
         }//end state
       }//end constructor
@@ -29,9 +26,10 @@ class MainScreen extends React.Component {
       componentWillMount() {        
       
       }//end componentWillMount
+
     
       onSubmit(newData) {
-        alert("time for Action: " + newData);
+        //alert("time for Action: " + newData);
         this.setState({
           data: [...this.state.data, newData]
         })
@@ -45,6 +43,7 @@ class MainScreen extends React.Component {
    }
       console.log("MainScreen - alerts: ", this.props.alerts );
       console.log("MainScreen - current data: ", this.state.data );
+      console.log("MainScreen - data store: ", this.props.data )
 
       const currentTime = new Date().toLocaleString();
       const testData = [
@@ -132,7 +131,7 @@ function mapStateToProps(state) {
 
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators({firstScreen, secondScreen, thirdScreen, fourthScreen, newNotification, closeScreen}, dispatch )
+    return bindActionCreators({firstScreen, secondScreen, thirdScreen, fourthScreen, newAlert, closeScreen}, dispatch )
 }//end mapDispatchToProps
     
 export default connect(mapStateToProps, mapDispatchToProps) (MainScreen)

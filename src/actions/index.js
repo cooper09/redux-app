@@ -82,3 +82,14 @@ export function closeScreen (data) {
         payload: data
     }; 
 }//end closeScreen
+
+//New Section strictly for MVC
+export function newAlert(data) {
+    alert('Actions Notify - New Alert', data );
+    //an action needs to return an action
+    return {
+        type: 'NEW_ALERT',
+        payload: data
+    }; 
+}
+
