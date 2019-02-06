@@ -21,20 +21,6 @@ const styles = theme => ({
   },
 });
 
-let id = 0;
-function createData(name, calories, fat, carbs, stinky) {
-  id += 1;
-  return { id, name, calories, fat, carbs, stinky };
-}
-
-const rows = [
-  createData('Frozen yoghurt goodies', 159, 6.0, 24, 4.0),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
-];
-
 function row ( x,i, header) {
   console.log('Create a row x: ', x, " i: ", i, " headers: ", header );
   const dataArr = x;

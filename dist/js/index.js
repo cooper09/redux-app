@@ -44223,6 +44223,10 @@ var _getBuildingData = require('./utils/getBuildingData.js');
 
 var _getOpsData = require('./utils/getOpsData.js');
 
+var _GenericClass = require('./containers/GenericClass');
+
+var _GenericClass2 = _interopRequireDefault(_GenericClass);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -44296,7 +44300,7 @@ var App = function (_Component) {
         _react2.default.createElement(
           'div',
           null,
-          'Master View Controller (MVC) v.0.0.2f'
+          'Master View Controller (MVC) v.0.0.2h'
         ),
         _react2.default.createElement(
           'div',
@@ -44321,7 +44325,7 @@ var App = function (_Component) {
 
 exports.default = App;
 
-},{"./components/login.js":254,"./components/mainscreen.js":255,"./utils/getBuildingData.js":262,"./utils/getLogData.js":263,"./utils/getOpsData.js":264,"react":210}],253:[function(require,module,exports){
+},{"./components/login.js":254,"./components/mainscreen.js":255,"./containers/GenericClass":256,"./utils/getBuildingData.js":263,"./utils/getLogData.js":264,"./utils/getOpsData.js":265,"react":210}],253:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -44748,7 +44752,26 @@ function mapDispatchToProps(dispatch) {
 
 exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(MainScreen);
 
-},{"../actions/index":253,"../containers/uiTable":256,"react":210,"react-redux":192,"redux":216,"socket.io-client":234}],256:[function(require,module,exports){
+},{"../actions/index":253,"../containers/uiTable":257,"react":210,"react-redux":192,"redux":216,"socket.io-client":234}],256:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+
+function GenericClass(props) {
+
+    return React.createElement(
+        "h1",
+        null,
+        " Generic Class "
+    );
+}
+GenericClass.propTypes = {};
+exports.default = GenericClass;
+
+},{}],257:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -44807,14 +44830,6 @@ var styles = function styles(theme) {
     }
   };
 };
-
-var id = 0;
-function createData(name, calories, fat, carbs, stinky) {
-  id += 1;
-  return { id: id, name: name, calories: calories, fat: fat, carbs: carbs, stinky: stinky };
-}
-
-var rows = [createData('Frozen yoghurt goodies', 159, 6.0, 24, 4.0), createData('Ice cream sandwich', 237, 9.0, 37, 4.3), createData('Eclair', 262, 16.0, 24, 6.0), createData('Cupcake', 305, 3.7, 67, 4.3), createData('Gingerbread', 356, 16.0, 49, 3.9)];
 
 function row(x, i, header) {
   console.log('Create a row x: ', x, " i: ", i, " headers: ", header);
@@ -44896,7 +44911,7 @@ SimpleTable.propTypes = {
 
 exports.default = (0, _styles.withStyles)(styles)(SimpleTable);
 
-},{"../utils/convertData":261,"@material-ui/core/Paper":16,"@material-ui/core/Table":20,"@material-ui/core/TableBody":22,"@material-ui/core/TableCell":24,"@material-ui/core/TableHead":26,"@material-ui/core/TableRow":28,"@material-ui/core/styles":45,"prop-types":182,"react":210}],257:[function(require,module,exports){
+},{"../utils/convertData":262,"@material-ui/core/Paper":16,"@material-ui/core/Table":20,"@material-ui/core/TableBody":22,"@material-ui/core/TableCell":24,"@material-ui/core/TableHead":26,"@material-ui/core/TableRow":28,"@material-ui/core/styles":45,"prop-types":182,"react":210}],258:[function(require,module,exports){
 'use strict';
 
 var _react = require('react');
@@ -44931,7 +44946,7 @@ _reactDom2.default.render(_react2.default.createElement(
     _react2.default.createElement(_App2.default, { store: store, state: store.getState() })
 ), document.getElementById('app'));
 
-},{"./App":252,"./reducers":259,"react":210,"react-dom":186,"react-redux":192,"redux":216}],258:[function(require,module,exports){
+},{"./App":252,"./reducers":260,"react":210,"react-dom":186,"react-redux":192,"redux":216}],259:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -44961,7 +44976,7 @@ var dataReducer = function dataReducer() {
 
 exports.default = dataReducer;
 
-},{}],259:[function(require,module,exports){
+},{}],260:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -44988,7 +45003,7 @@ var rootReducer = (0, _redux.combineReducers)({
 
 exports.default = rootReducer;
 
-},{"./dataReducer":258,"./screenReducer":260,"redux":216}],260:[function(require,module,exports){
+},{"./dataReducer":259,"./screenReducer":261,"redux":216}],261:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -45037,7 +45052,7 @@ var screenReducer = function screenReducer() {
 
 exports.default = screenReducer;
 
-},{}],261:[function(require,module,exports){
+},{}],262:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -45050,7 +45065,7 @@ function convertData() {
    alert("convertData");
 }
 
-},{}],262:[function(require,module,exports){
+},{}],263:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -45080,7 +45095,7 @@ function getBuildingData() {
   });
 }
 
-},{"axios":68}],263:[function(require,module,exports){
+},{"axios":68}],264:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -45110,7 +45125,7 @@ function getLogData() {
   });
 }
 
-},{"axios":68}],264:[function(require,module,exports){
+},{"axios":68}],265:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -45140,4 +45155,4 @@ function getOpsData() {
   });
 }
 
-},{"axios":68}]},{},[257]);
+},{"axios":68}]},{},[258]);

@@ -3,9 +3,11 @@ import  Login  from './components/login.js';
 import  MainScreen  from './components/mainscreen.js';
 
 //Utility functions
-import { getLogData } from './utils/getLogData.js'
-import { getBuildingData } from './utils/getBuildingData.js'
-import { getOpsData } from './utils/getOpsData.js'
+import { getLogData } from './utils/getLogData.js';
+import { getBuildingData } from './utils/getBuildingData.js';
+import { getOpsData } from './utils/getOpsData.js';
+
+import GenericClass from './containers/GenericClass'
 
 class App extends Component {
   constructor(props){
@@ -52,7 +54,7 @@ componentWillMount() {
     console.log("App - state: ", this.props.state );
     return (
       <div className="App">
-        <div>Master View Controller (MVC) v.0.0.2f</div>
+        <div>Master View Controller (MVC) v.0.0.2h</div>
         <div>Currently using React  {React.version}</div>
         <br/><br/>
         <Login onLogin={ event =>{
