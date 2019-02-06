@@ -46,26 +46,35 @@ class MainScreen extends React.Component {
       console.log("MainScreen - alerts: ", this.props.alerts );
       console.log("MainScreen - current data: ", this.state.data );
 
+      const currentTime = new Date().toLocaleString();
       const testData = [
         {
-          name: "One",
-          prop: "one"
+          name: currentTime,
+          prop: "timestamp"
         },
         {
-          name: "Two",
-          prop: "two"
+          name: "Site1165-628W238St",
+          prop: "building"
         },
         {
-          name: "Five",
-          prop: "five"
+          name: "0011-01.VDM",
+          prop: "doorstation"
         },
         {
-          name: "Seven",
-          prop: "seven"
+          name: "tbrooks",
+          prop: "operator"
         },
         { 
-          name: "Nine",
-          prop: "ten"
+          name: currentTime,
+          prop: "attended"
+        },
+        {
+          name: "00:00:12",
+          prop: "duration"
+        },
+        {
+          name: "VDM On",
+          prop: "alarmtype"
         }
       ];
 
