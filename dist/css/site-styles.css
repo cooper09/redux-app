@@ -296,3 +296,14 @@ p .fontStyle {
   list-style: none;
   color: #000;
 }
+
+/* line 191, ../../sass/partials/_main.sass */
+.newRow {
+  background: red;
+  cursor: pointer;
+}
+
+/* line 195, ../../sass/partials/_main.sass */
+.selectedRow {
+  background: green;
+}

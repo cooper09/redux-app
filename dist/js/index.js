@@ -44300,7 +44300,7 @@ var App = function (_Component) {
         _react2.default.createElement(
           'div',
           null,
-          'Master View Controller (MVC) v.0.0.2l'
+          'Master View Controller (MVC) v.0.0.2e'
         ),
         _react2.default.createElement(
           'div',
@@ -44865,8 +44865,17 @@ var styles = function styles(theme) {
   };
 };
 
+function selectAlert(e) {
+  event.preventDefault();
+  console.log("clicked: ", e.target.id);
+  var element = document.getElementById(e.target.id);
+  element.classList.toggle("selectedRow");
+}
+
 function row(x, i, header) {
-  console.log('Create a row x: ', x, " i: ", i, " headers: ", header);
+  var _this = this;
+
+  console.log('uiTable - Create a row x: ', x, " i: ", i, " headers: ", header);
   var dataArr = x;
   return _react2.default.createElement(
     _TableRow2.default,
@@ -44874,7 +44883,7 @@ function row(x, i, header) {
     x.map(function (y, k) {
       return _react2.default.createElement(
         _TableCell2.default,
-        { key: 'trc-' + k },
+        { key: 'trc-' + k, onClick: selectAlert.bind(_this), className: 'newRow', id: 'thisAlert' },
         y.name
       );
     })

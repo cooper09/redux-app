@@ -21,13 +21,20 @@ const styles = theme => ({
   },
 });
 
+function selectAlert(e) {
+  event.preventDefault();
+  console.log("clicked: ", e.target.id );
+  var element = document.getElementById(e.target.id);
+  element.classList.toggle("selectedRow");
+}
+
 function row ( x,i, header) {
-  console.log('Create a row x: ', x, " i: ", i, " headers: ", header );
+  console.log('uiTable - Create a row x: ', x, " i: ", i, " headers: ", header );
   const dataArr = x;
   return (<TableRow key={`tr-${i}`}>
     {
       x.map((y,k) => (
-        <TableCell key={`trc-${k}`}>
+        <TableCell key={`trc-${k}`} onClick={selectAlert.bind(this)} className="newRow" id="thisAlert">
            {y.name}
         </TableCell>
       ))
@@ -35,9 +42,9 @@ function row ( x,i, header) {
   </TableRow>
   )}
 
+
 function SimpleTable(props) {
 
-  
   const { classes } = props;
   const { headers } = props;
   const { data } = props;
@@ -52,10 +59,10 @@ function SimpleTable(props) {
     <Paper className={classes.root}>
       <Table className={classes.table}>
         <TableHead>
-          <TableRow>
+          <TableRow >
             {
               headers.map( (x, i) => 
-                <TableCell key={`thc-${i}`} >
+                <TableCell key={`thc-${i}`}>
                   {x.name}
                 </TableCell>
               )
