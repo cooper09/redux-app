@@ -21,11 +21,26 @@ const styles = theme => ({
   },
 });
 
+function SimpleTable(props) {
+
+  const { classes } = props;
+  const { headers } = props;
+  const { data } = props;
+  const { alert } = props;
+  const { store } = props;
+
+  console.log("SimpleTable headers: ", headers );
+  console.log("SimpleTable data: ", data );
+  console.log("SimpleTable data store: ", store );
+  console.log("SimpleTable alert: ", alert );
+  console.log("SimpleTable alert type: ", typeof(alert) );
+
 function selectAlert(e) {
   event.preventDefault();
   console.log("clicked: ", e.target.id );
   var element = document.getElementById(e.target.id);
   element.classList.toggle("selectedRow");
+  store.dispatch({type: "SELECT_ALERT", payload: "alert selected" });;
 }
 
 function row ( x,i, header) {
@@ -41,19 +56,6 @@ function row ( x,i, header) {
     }
   </TableRow>
   )}
-
-
-function SimpleTable(props) {
-
-  const { classes } = props;
-  const { headers } = props;
-  const { data } = props;
-  const { alert } = props;
-
-  console.log("SimpleTable headers: ", headers );
-  console.log("SimpleTable data: ", data );
-  console.log("SimpleTable alert: ", alert );
-  console.log("SimpleTable alert type: ", typeof(alert) );
 
   return (
     <Paper className={classes.root}>
@@ -75,7 +77,7 @@ function SimpleTable(props) {
             data.map((x, i) => row(x,i, headers))
           } 
             <TableRow>
-             <TableCell>End of Table</TableCell>
+             <TableCell onClick={test()}>End of Table</TableCell>
             </TableRow>
         </TableBody>
       </Table>

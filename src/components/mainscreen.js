@@ -124,7 +124,7 @@ class MainScreen extends React.Component {
           <br/><br/>
           <button onClick={()=> this.onSubmit(testData) } >Add Alert</button>
           <br/><br/>
-          <Table  data={this.state.data} alert={this.props.data} headers={[
+          <Table store={this.props.store}  data={this.state.data} alert={this.props.data} headers={[
             {
               name: "Alarm time",
               prop: 'alarmTime'

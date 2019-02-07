@@ -54,7 +54,7 @@ componentWillMount() {
     console.log("App - state: ", this.props.state );
     return (
       <div className="App">
-        <div>Master View Controller (MVC) v.0.0.2e</div>
+        <div>Master View Controller (MVC) v.0.0.2b</div>
         <div>Currently using React  {React.version}</div>
         <br/><br/>
         <Login onLogin={ event =>{
@@ -63,7 +63,7 @@ componentWillMount() {
           console.log("onRegister")
         }} visible={this.props.state.screen} state={this.props.state} store={this.props.store}/>
       
-        <MainScreen buildings={this.state.buildingList} operators={this.state.opsList} alerts={this.state.logList}/>
+        <MainScreen buildings={this.state.buildingList} operators={this.state.opsList} alerts={this.state.logList} store={this.props.store}/>
       </div>
     );
   }

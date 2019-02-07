@@ -44300,7 +44300,7 @@ var App = function (_Component) {
         _react2.default.createElement(
           'div',
           null,
-          'Master View Controller (MVC) v.0.0.2e'
+          'Master View Controller (MVC) v.0.0.2b'
         ),
         _react2.default.createElement(
           'div',
@@ -44315,7 +44315,7 @@ var App = function (_Component) {
           }, onRegister: function onRegister(data) {
             console.log("onRegister");
           }, visible: this.props.state.screen, state: this.props.state, store: this.props.store }),
-        _react2.default.createElement(_mainscreen2.default, { buildings: this.state.buildingList, operators: this.state.opsList, alerts: this.state.logList })
+        _react2.default.createElement(_mainscreen2.default, { buildings: this.state.buildingList, operators: this.state.opsList, alerts: this.state.logList, store: this.props.store })
       );
     }
   }]);
@@ -44738,7 +44738,7 @@ var MainScreen = function (_React$Component) {
         ),
         _react2.default.createElement('br', null),
         _react2.default.createElement('br', null),
-        _react2.default.createElement(_uiTable2.default, { data: this.state.data, alert: this.props.data, headers: [{
+        _react2.default.createElement(_uiTable2.default, { store: this.props.store, data: this.state.data, alert: this.props.data, headers: [{
             name: "Alarm time",
             prop: 'alarmTime'
           }, {
@@ -44865,42 +44865,45 @@ var styles = function styles(theme) {
   };
 };
 
-function selectAlert(e) {
-  event.preventDefault();
-  console.log("clicked: ", e.target.id);
-  var element = document.getElementById(e.target.id);
-  element.classList.toggle("selectedRow");
-}
-
-function row(x, i, header) {
-  var _this = this;
-
-  console.log('uiTable - Create a row x: ', x, " i: ", i, " headers: ", header);
-  var dataArr = x;
-  return _react2.default.createElement(
-    _TableRow2.default,
-    { key: 'tr-' + i },
-    x.map(function (y, k) {
-      return _react2.default.createElement(
-        _TableCell2.default,
-        { key: 'trc-' + k, onClick: selectAlert.bind(_this), className: 'newRow', id: 'thisAlert' },
-        y.name
-      );
-    })
-  );
-}
-
 function SimpleTable(props) {
   var classes = props.classes;
   var headers = props.headers;
   var data = props.data;
   var alert = props.alert;
+  var store = props.store;
 
 
   console.log("SimpleTable headers: ", headers);
   console.log("SimpleTable data: ", data);
+  console.log("SimpleTable data store: ", store);
   console.log("SimpleTable alert: ", alert);
   console.log("SimpleTable alert type: ", typeof alert === 'undefined' ? 'undefined' : _typeof(alert));
+
+  function selectAlert(e) {
+    event.preventDefault();
+    console.log("clicked: ", e.target.id);
+    var element = document.getElementById(e.target.id);
+    element.classList.toggle("selectedRow");
+    store.dispatch({ type: "SELECT_ALERT", payload: "alert selected" });;
+  }
+
+  function row(x, i, header) {
+    var _this = this;
+
+    console.log('uiTable - Create a row x: ', x, " i: ", i, " headers: ", header);
+    var dataArr = x;
+    return _react2.default.createElement(
+      _TableRow2.default,
+      { key: 'tr-' + i },
+      x.map(function (y, k) {
+        return _react2.default.createElement(
+          _TableCell2.default,
+          { key: 'trc-' + k, onClick: selectAlert.bind(_this), className: 'newRow', id: 'thisAlert' },
+          y.name
+        );
+      })
+    );
+  }
 
   return _react2.default.createElement(
     _Paper2.default,
@@ -44934,7 +44937,7 @@ function SimpleTable(props) {
           null,
           _react2.default.createElement(
             _TableCell2.default,
-            null,
+            { onClick: test() },
             'End of Table'
           )
         )
