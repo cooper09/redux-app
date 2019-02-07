@@ -77,7 +77,7 @@ function row ( x,i, header) {
             data.map((x, i) => row(x,i, headers))
           } 
             <TableRow>
-             <TableCell onClick={test()}>End of Table</TableCell>
+             <TableCell>End of Table</TableCell>
             </TableRow>
         </TableBody>
       </Table>

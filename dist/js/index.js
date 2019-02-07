@@ -44300,7 +44300,7 @@ var App = function (_Component) {
         _react2.default.createElement(
           'div',
           null,
-          'Master View Controller (MVC) v.0.0.2b'
+          'Master View Controller (MVC) v.0.0.2l'
         ),
         _react2.default.createElement(
           'div',
@@ -44325,7 +44325,7 @@ var App = function (_Component) {
 
 exports.default = App;
 
-},{"./components/login.js":254,"./components/mainscreen.js":255,"./containers/GenericClass":256,"./utils/getBuildingData.js":263,"./utils/getLogData.js":264,"./utils/getOpsData.js":265,"react":210}],253:[function(require,module,exports){
+},{"./components/login.js":254,"./components/mainscreen.js":255,"./containers/GenericClass":256,"./utils/getBuildingData.js":263,"./utils/getLogData.js":266,"./utils/getOpsData.js":267,"react":210}],253:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -44340,6 +44340,7 @@ exports.newNotification = newNotification;
 exports.fourthScreen = fourthScreen;
 exports.closeScreen = closeScreen;
 exports.newAlert = newAlert;
+exports.selectAlert = selectAlert;
 
 /* 
 Actions File 
@@ -44431,6 +44432,15 @@ function newAlert(data) {
     //an action needs to return an action
     return {
         type: 'NEW_ALERT',
+        payload: data
+    };
+}
+
+function selectAlert(data) {
+    alert('Actions Notify - Select Alert', data);
+    //an action needs to return an action
+    return {
+        type: 'SELECT_ALERT',
         payload: data
     };
 }
@@ -44603,6 +44613,10 @@ var _uiTable = require('../containers/uiTable');
 
 var _uiTable2 = _interopRequireDefault(_uiTable);
 
+var _getData = require('../utils/getData');
+
+var _getHeaders = require('../utils/getHeaders');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
@@ -44659,61 +44673,13 @@ var MainScreen = function (_React$Component) {
       console.log("MainScreen - current data: ", this.state.data);
       console.log("MainScreen - data store: ", this.props.data);
 
+      var headers = [];
       var testData = [];
+      var currentData = this.props.data;
 
-      if (this.props.data[0].results) {
-        console.log("initial");
-
-        var currentTime = new Date().toLocaleString();
-        testData = [{
-          name: currentTime,
-          prop: "timestamp"
-        }, {
-          name: "Site1165-628W238St",
-          prop: "building"
-        }, {
-          name: "0011-01.VDM",
-          prop: "doorstation"
-        }, {
-          name: "tbrooks",
-          prop: "operator"
-        }, {
-          name: currentTime,
-          prop: "attended"
-        }, {
-          name: "00:00:12",
-          prop: "duration"
-        }, {
-          name: "VDM On",
-          prop: "alarmtype"
-        }];
-      } else {
-        console.log("new");
-        testData = [{
-          name: this.props.data[0].timeStamp,
-          prop: "timestamp"
-        }, {
-          name: this.props.data[0].building,
-          prop: "building"
-        }, {
-          name: this.props.data[0].doorStation,
-          prop: "doorstation"
-        }, {
-          name: this.props.data[0].operator,
-          prop: "operator"
-        }, {
-          name: this.props.data[0].attended,
-          prop: "attended"
-        }, {
-          name: this.props.data[0].duration,
-          prop: "duration"
-        }, {
-          name: this.props.data[0].alarmtype,
-          prop: "alarmtype"
-        }]; //end testData Array
-        console.log("MainScreen - new notification: ", testData);
-      } //end iffy
-
+      headers = (0, _getHeaders.getHeaders)();
+      testData = (0, _getData.getData)(currentData);
+      //alert ("getData testData: " + headers );
 
       return _react2.default.createElement(
         'div',
@@ -44738,28 +44704,7 @@ var MainScreen = function (_React$Component) {
         ),
         _react2.default.createElement('br', null),
         _react2.default.createElement('br', null),
-        _react2.default.createElement(_uiTable2.default, { store: this.props.store, data: this.state.data, alert: this.props.data, headers: [{
-            name: "Alarm time",
-            prop: 'alarmTime'
-          }, {
-            name: "Building",
-            prop: 'building'
-          }, {
-            name: "Doorstation",
-            prop: 'doorStation'
-          }, {
-            name: "Operator",
-            prop: 'operator'
-          }, {
-            name: "Attended",
-            prop: 'attended'
-          }, {
-            name: "Duration",
-            prop: 'duration'
-          }, {
-            name: "Alarm type",
-            prop: 'alarmType'
-          }] })
+        _react2.default.createElement(_uiTable2.default, { store: this.props.store, data: this.state.data, alert: this.props.data, headers: headers })
       );
     } //end render
 
@@ -44784,7 +44729,7 @@ function mapDispatchToProps(dispatch) {
 
 exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(MainScreen);
 
-},{"../actions/index":253,"../containers/uiTable":257,"react":210,"react-redux":192,"redux":216,"socket.io-client":234}],256:[function(require,module,exports){
+},{"../actions/index":253,"../containers/uiTable":257,"../utils/getData":264,"../utils/getHeaders":265,"react":210,"react-redux":192,"redux":216,"socket.io-client":234}],256:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -44937,7 +44882,7 @@ function SimpleTable(props) {
           null,
           _react2.default.createElement(
             _TableCell2.default,
-            { onClick: test() },
+            null,
             'End of Table'
           )
         )
@@ -45014,7 +44959,11 @@ var dataReducer = function dataReducer() {
             notifyArr.push(action.payload);
             return notifyArr;
             break;
-    }
+        case 'SELECT_ALERT':
+            console.log('Select Alert payload: ', action.payload);
+            return action.payload;
+            break;
+    } //end switch
 
     return state;
 };
@@ -45141,6 +45090,111 @@ function getBuildingData() {
 }
 
 },{"axios":68}],264:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.getData = getData;
+
+
+function getData(data) {
+  console.log("getData");
+  var dataArr = ["one", "two", "Three"];
+
+  if (data[0].results) {
+    console.log("initial");
+
+    var currentTime = new Date().toLocaleString();
+    dataArr = [{
+      name: currentTime,
+      prop: "timestamp"
+    }, {
+      name: "Site1165-628W238St",
+      prop: "building"
+    }, {
+      name: "0011-01.VDM",
+      prop: "doorstation"
+    }, {
+      name: "tbrooks",
+      prop: "operator"
+    }, {
+      name: currentTime,
+      prop: "attended"
+    }, {
+      name: "00:00:12",
+      prop: "duration"
+    }, {
+      name: "VDM On",
+      prop: "alarmtype"
+    }];
+    return dataArr;
+  } else {
+    console.log("new");
+    dataArr = [{
+      name: data[0].timeStamp,
+      prop: "timestamp"
+    }, {
+      name: data[0].building,
+      prop: "building"
+    }, {
+      name: data[0].doorStation,
+      prop: "doorstation"
+    }, {
+      name: data[0].operator,
+      prop: "operator"
+    }, {
+      name: data[0].attended,
+      prop: "attended"
+    }, {
+      name: data[0].duration,
+      prop: "duration"
+    }, {
+      name: data[0].alarmtype,
+      prop: "alarmtype"
+    }]; //end testData Array
+    console.log("MainScreen - new notification: ", dataArr);
+    return dataArr;
+  } //end iffy
+} //getData
+
+},{}],265:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.getHeaders = getHeaders;
+
+
+function getHeaders() {
+  console.log("getHeaders");
+  var headers = [{
+    name: "Alarm time",
+    prop: 'alarmTime'
+  }, {
+    name: "Building",
+    prop: 'building'
+  }, {
+    name: "Doorstation",
+    prop: 'doorStation'
+  }, {
+    name: "Operator",
+    prop: 'operator'
+  }, {
+    name: "Attended",
+    prop: 'attended'
+  }, {
+    name: "Duration",
+    prop: 'duration'
+  }, {
+    name: "Alarm type",
+    prop: 'alarmType'
+  }];
+  return headers;
+} //getHeaders
+
+},{}],266:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -45170,7 +45224,7 @@ function getLogData() {
   });
 }
 
-},{"axios":68}],265:[function(require,module,exports){
+},{"axios":68}],267:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {

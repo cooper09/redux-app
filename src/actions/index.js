@@ -93,3 +93,12 @@ export function newAlert(data) {
     }; 
 }
 
+export function selectAlert(data) {
+    alert('Actions Notify - Select Alert', data );
+    //an action needs to return an action
+    return {
+        type: 'SELECT_ALERT',
+        payload: data
+    }; 
+}
+

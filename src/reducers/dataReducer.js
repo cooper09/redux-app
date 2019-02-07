@@ -16,7 +16,11 @@ const dataReducer = (state=initialState, action) => {
             notifyArr.push(action.payload);
             return notifyArr;
         break;
-    }
+        case 'SELECT_ALERT':
+        console.log('Select Alert payload: ', action.payload );
+        return action.payload;
+    break;
+    }//end switch
 
     return state;
 }

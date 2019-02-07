@@ -7,9 +7,12 @@ import { bindActionCreators } from 'redux';
 import socketIOClient from "socket.io-client";
 
 import { firstScreen, secondScreen, thirdScreen, fourthScreen, closeScreen } from '../actions/index';
-import { newAlert } from '../actions/index';
+import { newAlert,selectAlert } from '../actions/index';
 
-import Table from '../containers/uiTable'
+import Table from '../containers/uiTable';
+
+import { getData } from '../utils/getData';
+import { getHeaders } from '../utils/getHeaders'
 
 class MainScreen extends React.Component {
     constructor(props){
@@ -35,7 +38,7 @@ class MainScreen extends React.Component {
         })
       }
 
-      render() {
+  render() {
 
     if (this.props.screen != 'Main Screen') {
         console.log("Main Screen is off");
@@ -45,77 +48,13 @@ class MainScreen extends React.Component {
       console.log("MainScreen - current data: ", this.state.data );
       console.log("MainScreen - data store: ", this.props.data );
 
+      let headers = [];
       let testData = [];
+      let currentData = this.props.data;
 
-      if (this.props.data[0].results) {
-        console.log("initial");
-
-        const currentTime = new Date().toLocaleString();
-        testData = [
-            {
-              name: currentTime,
-              prop: "timestamp"
-            },
-            {
-              name: "Site1165-628W238St",
-              prop: "building"
-            },
-            {
-              name: "0011-01.VDM",
-              prop: "doorstation"
-            },
-            {
-              name: "tbrooks",
-              prop: "operator"
-            },
-            { 
-              name: currentTime,
-              prop: "attended"
-            },
-            {
-              name: "00:00:12",
-              prop: "duration"
-            },
-            {
-              name: "VDM On",
-              prop: "alarmtype"
-            }
-          ]; 
-      } else {
-        console.log("new");
-        testData = [
-          {
-            name: this.props.data[0].timeStamp,
-            prop: "timestamp"
-          },{
-            name: this.props.data[0].building,
-            prop: "building"
-          },
-          {
-            name: this.props.data[0].doorStation,
-            prop: "doorstation"
-          },
-          {
-            name: this.props.data[0].operator,
-            prop: "operator"
-          },
-          { 
-            name: this.props.data[0].attended,
-            prop: "attended"
-          },
-          {
-            name: this.props.data[0].duration,
-            prop: "duration"
-          },
-          {
-            name: this.props.data[0].alarmtype,
-            prop: "alarmtype"
-          }
-      ];//end testData Array
-      console.log("MainScreen - new notification: ", testData )
-      }//end iffy
-    
-
+      headers = getHeaders();
+      testData = getData(currentData);
+      //alert ("getData testData: " + headers );
 
       return (
         <div className='center option animated fadeIn mainScrn'><br/><br/> 
@@ -124,36 +63,7 @@ class MainScreen extends React.Component {
           <br/><br/>
           <button onClick={()=> this.onSubmit(testData) } >Add Alert</button>
           <br/><br/>
-          <Table store={this.props.store}  data={this.state.data} alert={this.props.data} headers={[
-            {
-              name: "Alarm time",
-              prop: 'alarmTime'
-            },
-            {
-              name: "Building",
-              prop: 'building'
-            },
-            {
-              name: "Doorstation",
-              prop: 'doorStation'
-            },
-            {
-              name: "Operator",
-              prop: 'operator'
-            },
-            {
-              name: "Attended",
-              prop: 'attended'
-            },
-            {
-              name: "Duration",
-              prop: 'duration'
-            },
-            {
-              name: "Alarm type",
-              prop: 'alarmType'
-            },
-          ]} />
+          <Table store={this.props.store}  data={this.state.data} alert={this.props.data} headers={headers} />
         </div>
       
       )

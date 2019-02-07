@@ -54,7 +54,7 @@ componentWillMount() {
     console.log("App - state: ", this.props.state );
     return (
       <div className="App">
-        <div>Master View Controller (MVC) v.0.0.2b</div>
+        <div>Master View Controller (MVC) v.0.0.2l</div>
         <div>Currently using React  {React.version}</div>
         <br/><br/>
         <Login onLogin={ event =>{
