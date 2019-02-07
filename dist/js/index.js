@@ -44300,7 +44300,7 @@ var App = function (_Component) {
         _react2.default.createElement(
           'div',
           null,
-          'Master View Controller (MVC) v.0.0.2h'
+          'Master View Controller (MVC) v.0.0.2l'
         ),
         _react2.default.createElement(
           'div',
@@ -44659,29 +44659,61 @@ var MainScreen = function (_React$Component) {
       console.log("MainScreen - current data: ", this.state.data);
       console.log("MainScreen - data store: ", this.props.data);
 
-      var currentTime = new Date().toLocaleString();
-      var testData = [{
-        name: currentTime,
-        prop: "timestamp"
-      }, {
-        name: "Site1165-628W238St",
-        prop: "building"
-      }, {
-        name: "0011-01.VDM",
-        prop: "doorstation"
-      }, {
-        name: "tbrooks",
-        prop: "operator"
-      }, {
-        name: currentTime,
-        prop: "attended"
-      }, {
-        name: "00:00:12",
-        prop: "duration"
-      }, {
-        name: "VDM On",
-        prop: "alarmtype"
-      }];
+      var testData = [];
+
+      if (this.props.data[0].results) {
+        console.log("initial");
+
+        var currentTime = new Date().toLocaleString();
+        testData = [{
+          name: currentTime,
+          prop: "timestamp"
+        }, {
+          name: "Site1165-628W238St",
+          prop: "building"
+        }, {
+          name: "0011-01.VDM",
+          prop: "doorstation"
+        }, {
+          name: "tbrooks",
+          prop: "operator"
+        }, {
+          name: currentTime,
+          prop: "attended"
+        }, {
+          name: "00:00:12",
+          prop: "duration"
+        }, {
+          name: "VDM On",
+          prop: "alarmtype"
+        }];
+      } else {
+        console.log("new");
+        testData = [{
+          name: this.props.data[0].timeStamp,
+          prop: "timestamp"
+        }, {
+          name: this.props.data[0].building,
+          prop: "building"
+        }, {
+          name: this.props.data[0].doorStation,
+          prop: "doorstation"
+        }, {
+          name: this.props.data[0].operator,
+          prop: "operator"
+        }, {
+          name: this.props.data[0].attended,
+          prop: "attended"
+        }, {
+          name: this.props.data[0].duration,
+          prop: "duration"
+        }, {
+          name: this.props.data[0].alarmtype,
+          prop: "alarmtype"
+        }]; //end testData Array
+        console.log("MainScreen - new notification: ", testData);
+      } //end iffy
+
 
       return _react2.default.createElement(
         'div',
@@ -44778,6 +44810,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
@@ -44857,10 +44891,7 @@ function SimpleTable(props) {
   console.log("SimpleTable headers: ", headers);
   console.log("SimpleTable data: ", data);
   console.log("SimpleTable alert: ", alert);
-
-  if (alert.result != undefined) {
-    console.log("Yumpin Yimminy!");
-  }
+  console.log("SimpleTable alert type: ", typeof alert === 'undefined' ? 'undefined' : _typeof(alert));
 
   return _react2.default.createElement(
     _Paper2.default,
@@ -44967,7 +44998,9 @@ var dataReducer = function dataReducer() {
     switch (action.type) {
         case 'NEW_ALERT':
             console.log('NEW Alert payload: ', action.payload);
-            return action.payload;
+            var notifyArr = [];
+            notifyArr.push(action.payload);
+            return notifyArr;
             break;
     }
 

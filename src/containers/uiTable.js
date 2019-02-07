@@ -36,6 +36,8 @@ function row ( x,i, header) {
   )}
 
 function SimpleTable(props) {
+
+  
   const { classes } = props;
   const { headers } = props;
   const { data } = props;
@@ -43,12 +45,8 @@ function SimpleTable(props) {
 
   console.log("SimpleTable headers: ", headers );
   console.log("SimpleTable data: ", data );
-  console.log("SimpleTable alert: ", alert);
-
-  if (alert.result  != undefined ) {
-    console.log("Yumpin Yimminy!");
-
-  }
+  console.log("SimpleTable alert: ", alert );
+  console.log("SimpleTable alert type: ", typeof(alert) );
 
   return (
     <Paper className={classes.root}>

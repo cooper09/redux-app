@@ -12,7 +12,9 @@ const dataReducer = (state=initialState, action) => {
     switch(action.type) {
         case 'NEW_ALERT':
             console.log('NEW Alert payload: ', action.payload );
-            return action.payload;
+            const notifyArr = [];
+            notifyArr.push(action.payload);
+            return notifyArr;
         break;
     }
 

@@ -43,39 +43,79 @@ class MainScreen extends React.Component {
    }
       console.log("MainScreen - alerts: ", this.props.alerts );
       console.log("MainScreen - current data: ", this.state.data );
-      console.log("MainScreen - data store: ", this.props.data )
+      console.log("MainScreen - data store: ", this.props.data );
 
-      const currentTime = new Date().toLocaleString();
-      const testData = [
-        {
-          name: currentTime,
-          prop: "timestamp"
-        },
-        {
-          name: "Site1165-628W238St",
-          prop: "building"
-        },
-        {
-          name: "0011-01.VDM",
-          prop: "doorstation"
-        },
-        {
-          name: "tbrooks",
-          prop: "operator"
-        },
-        { 
-          name: currentTime,
-          prop: "attended"
-        },
-        {
-          name: "00:00:12",
-          prop: "duration"
-        },
-        {
-          name: "VDM On",
-          prop: "alarmtype"
-        }
-      ];
+      let testData = [];
+
+      if (this.props.data[0].results) {
+        console.log("initial");
+
+        const currentTime = new Date().toLocaleString();
+        testData = [
+            {
+              name: currentTime,
+              prop: "timestamp"
+            },
+            {
+              name: "Site1165-628W238St",
+              prop: "building"
+            },
+            {
+              name: "0011-01.VDM",
+              prop: "doorstation"
+            },
+            {
+              name: "tbrooks",
+              prop: "operator"
+            },
+            { 
+              name: currentTime,
+              prop: "attended"
+            },
+            {
+              name: "00:00:12",
+              prop: "duration"
+            },
+            {
+              name: "VDM On",
+              prop: "alarmtype"
+            }
+          ]; 
+      } else {
+        console.log("new");
+        testData = [
+          {
+            name: this.props.data[0].timeStamp,
+            prop: "timestamp"
+          },{
+            name: this.props.data[0].building,
+            prop: "building"
+          },
+          {
+            name: this.props.data[0].doorStation,
+            prop: "doorstation"
+          },
+          {
+            name: this.props.data[0].operator,
+            prop: "operator"
+          },
+          { 
+            name: this.props.data[0].attended,
+            prop: "attended"
+          },
+          {
+            name: this.props.data[0].duration,
+            prop: "duration"
+          },
+          {
+            name: this.props.data[0].alarmtype,
+            prop: "alarmtype"
+          }
+      ];//end testData Array
+      console.log("MainScreen - new notification: ", testData )
+      }//end iffy
+    
+
 
       return (
         <div className='center option animated fadeIn mainScrn'><br/><br/> 
