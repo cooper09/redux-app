@@ -21,33 +21,34 @@ const styles = theme => ({
 
 function GenericClass(props) {
 
-    const { alert } = props;
+    const { alert, header } = props;
     console.log("Generic Class alert: ", alert.notification[0].name)
 
     return (
         <div>
-            <h1> Generic Class 6 </h1>
-            
+            <h1> Generic Class 9</h1>
             {
                alert.notification.map((obj, i )=> {
                     console.log("can I read this array: ", obj.prop)
-
                      return <span key={i}>{obj.name} </span>
                 }) 
             }
             <hr></hr>
             <Paper className="">
                 <Table className="">
-                    <TableHead>
-                    <TableRow>
-                        <TableCell>Dessert (100g serving)</TableCell>
-                        <TableCell align="right">Calories</TableCell>
-                        <TableCell align="right">Fat (g)</TableCell>
-                        <TableCell align="right">Carbs (g)</TableCell>
-                        <TableCell align="right">Protein (g)</TableCell>
+                <TableHead>
+                    <TableRow style={{color: "black"}}>
+                        {
+                
+                            header.map( (row, i) => 
+                                <TableCell key={`thc-${i}`}>
+                                {row.name}
+                                </TableCell>
+                            )
+                        }
                     </TableRow>
-                    </TableHead>
-                    <TableBody>
+                </TableHead>
+                <TableBody>
                     {
 
                     /*    rows.map(row => (

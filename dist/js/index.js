@@ -44727,7 +44727,31 @@ var MainScreen = function (_React$Component) {
         ),
         _react2.default.createElement('br', null),
         _react2.default.createElement('br', null),
-        _react2.default.createElement(_GenericClass2.default, { alert: this.props.reducerdata })
+        _react2.default.createElement(_GenericClass2.default, { alert: this.props.reducerdata, header: [{
+            prop: "timestamp",
+            name: "timeStamp"
+          }, {
+            prop: "firstname",
+            name: "firstName"
+          }, {
+            prop: "lastname",
+            name: "lastName"
+          }, {
+            prop: "duration",
+            name: "duration"
+          }, {
+            prop: "doorstation",
+            name: "doorStation"
+          }, {
+            prop: "building",
+            name: "building"
+          }, {
+            prop: "attended",
+            name: "attended"
+          }, {
+            prop: "alarmtype",
+            name: "alarmType"
+          }] })
       );
     } //end render
 
@@ -44809,7 +44833,8 @@ var styles = function styles(theme) {
 };
 
 function GenericClass(props) {
-    var alert = props.alert;
+    var alert = props.alert,
+        header = props.header;
 
     console.log("Generic Class alert: ", alert.notification[0].name);
 
@@ -44819,11 +44844,10 @@ function GenericClass(props) {
         _react2.default.createElement(
             'h1',
             null,
-            ' Generic Class 6 '
+            ' Generic Class 9'
         ),
         alert.notification.map(function (obj, i) {
             console.log("can I read this array: ", obj.prop);
-
             return _react2.default.createElement(
                 'span',
                 { key: i },
@@ -44843,32 +44867,14 @@ function GenericClass(props) {
                     null,
                     _react2.default.createElement(
                         _TableRow2.default,
-                        null,
-                        _react2.default.createElement(
-                            _TableCell2.default,
-                            null,
-                            'Dessert (100g serving)'
-                        ),
-                        _react2.default.createElement(
-                            _TableCell2.default,
-                            { align: 'right' },
-                            'Calories'
-                        ),
-                        _react2.default.createElement(
-                            _TableCell2.default,
-                            { align: 'right' },
-                            'Fat (g)'
-                        ),
-                        _react2.default.createElement(
-                            _TableCell2.default,
-                            { align: 'right' },
-                            'Carbs (g)'
-                        ),
-                        _react2.default.createElement(
-                            _TableCell2.default,
-                            { align: 'right' },
-                            'Protein (g)'
-                        )
+                        { style: { color: "black" } },
+                        header.map(function (row, i) {
+                            return _react2.default.createElement(
+                                _TableCell2.default,
+                                { key: 'thc-' + i },
+                                row.name
+                            );
+                        })
                     )
                 ),
                 _react2.default.createElement(_TableBody2.default, null)
