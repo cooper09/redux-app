@@ -36250,7 +36250,7 @@ var App = function (_Component) {
         _react2.default.createElement(
           'div',
           null,
-          'Master View Controller (MVC) v.0.0.2f'
+          'Master View Controller (MVC) v.0.0.3a'
         ),
         _react2.default.createElement(
           'div',
@@ -36275,7 +36275,7 @@ var App = function (_Component) {
 
 exports.default = App;
 
-},{"./components/login.js":138,"./components/mainscreen.js":139,"./utils/getBuildingData.js":145,"./utils/getLogData.js":146,"./utils/getOpsData.js":147,"react":94}],136:[function(require,module,exports){
+},{"./components/login.js":137,"./components/mainscreen.js":138,"./utils/getBuildingData.js":145,"./utils/getLogData.js":146,"./utils/getOpsData.js":147,"react":94}],136:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -36375,125 +36375,6 @@ function closeScreen(data) {
 } //end closeScreen
 
 },{}],137:[function(require,module,exports){
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = require("react");
-
-var _react2 = _interopRequireDefault(_react);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-function endCall(e) {
-    event.preventDefault();
-    console.log("End Call: ", e);
-    var number = document.getElementById("kaboodle").value;
-    alert("endCall: " + number);
-}
-
-function storeTime() {}
-function selectAlert(e) {
-    //event.preventDefault();
-    console.log("Selected: ", e.target);
-    e.target.classList.remove('alert');
-    e.target.classList.add('selected');
-    console.log("current notification timestamp: ", alert.notification[0].name);
-    console.log("current notification timestamp state: ", state.timeStamp);
-    var timestamp = alert.notification[0].name;
-    var currentTime = Data().toString;
-    var attendedTime = currentTime = timestamp;
-} //end selectAlert
-
-function rowWrapper(row) {
-    var i = 0;
-
-    return row.map(function (x) {
-        i++;
-        return _react2.default.createElement(
-            "span",
-            { key: i, className: "alertItem" },
-            x.name
-        );
-    });
-} //end rowWrapper
-
-var Alerts = function (_React$Component) {
-    _inherits(Alerts, _React$Component);
-
-    function Alerts(props) {
-        _classCallCheck(this, Alerts);
-
-        var _this = _possibleConstructorReturn(this, (Alerts.__proto__ || Object.getPrototypeOf(Alerts)).call(this, props));
-
-        _this.state = {
-            timeStamp: "00",
-            attended: "00",
-            duration: "00" //end state
-        };return _this;
-    } //end constructor
-
-    _createClass(Alerts, [{
-        key: "render",
-        value: function render() {
-            var alert = this.props.alert.alert;
-
-            console.log(" Alerts alert: ", this.props.alert.notification[0].name);
-            console.log("Alerts notifications: ", this.props.alert.notifications[0]);
-            var k = 0;
-            var alertNo = 0;
-
-            return alert.notifications[0].map(function (top_level) {
-                k++;
-                alertNo++;
-                return _react2.default.createElement(
-                    "div",
-                    { key: k, id: "kaboodle" },
-                    _react2.default.createElement(
-                        "p",
-                        { key: k, className: "alert", onClick: selectAlert },
-                        rowWrapper(top_level),
-                        " "
-                    ),
-                    _react2.default.createElement(
-                        "span",
-                        null,
-                        _react2.default.createElement(
-                            "button",
-                            { className: "closeBtn", onClick: endCall },
-                            "Close Call"
-                        ),
-                        " "
-                    ),
-                    _react2.default.createElement(
-                        "button",
-                        { onClick: function onClick() {
-                                return endCall("test");
-                            } },
-                        "X"
-                    )
-                );
-            });
-        } //end render
-
-    }]);
-
-    return Alerts;
-}(_react2.default.Component); //end Alerts
-
-exports.default = Alerts;
-
-},{"react":94}],138:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -36659,7 +36540,7 @@ function mapDispatchToProps(dispatch) {
 
 exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(LoginComponent);
 
-},{"../actions/index":136,"react":94,"react-redux":76,"redux":100,"socket.io-client":118}],139:[function(require,module,exports){
+},{"../actions/index":136,"react":94,"react-redux":76,"redux":100,"socket.io-client":118}],138:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -36678,13 +36559,9 @@ var _index = require('../actions/index');
 
 var _redux = require('redux');
 
-var _GenericClass = require('../containers/GenericClass');
+var _GenericClass = require('../containers/Generic-Class');
 
 var _GenericClass2 = _interopRequireDefault(_GenericClass);
-
-var _Alerts = require('../components/Alerts');
-
-var _Alerts2 = _interopRequireDefault(_Alerts);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -36718,10 +36595,10 @@ var MainScreen = function (_React$Component) {
         name: "operator"
       }, {
         prop: "attended",
-        name: "attended"
+        name: null
       }, {
         prop: "duration",
-        name: "duration"
+        name: null
       }, {
         prop: "alarmtype",
         name: "alarmType"
@@ -36764,10 +36641,10 @@ var MainScreen = function (_React$Component) {
         name: "tbrooks"
       }, {
         prop: "duration",
-        name: timeStamp
+        name: null
       }, {
         prop: "attended",
-        name: timeStamp
+        name: null
       }, {
         prop: "alarmtype",
         name: "VDM CALL"
@@ -36786,6 +36663,16 @@ var MainScreen = function (_React$Component) {
         ),
         _react2.default.createElement('br', null),
         _react2.default.createElement('br', null),
+        _react2.default.createElement(
+          'button',
+          {
+            className: 'alertBtn',
+            onClick: function onClick() {
+              return _this2.props.store.dispatch({ type: "NEW_NOTIFY", payload: testData });
+            }
+          },
+          'Update'
+        ),
         _react2.default.createElement(_GenericClass2.default, { alert: this.props.reducerdata, notifications: this.props.notification })
       );
     } //end render
@@ -36810,89 +36697,204 @@ function mapDispatchToProps(dispatch) {
 } //end mapDispatchToPropsgu
 exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(MainScreen);
 
-},{"../actions/index":136,"../components/Alerts":137,"../containers/GenericClass":140,"react":94,"react-redux":76,"redux":100}],140:[function(require,module,exports){
-"use strict";
+},{"../actions/index":136,"../containers/Generic-Class":140,"react":94,"react-redux":76,"redux":100}],139:[function(require,module,exports){
+'use strict';
 
 Object.defineProperty(exports, "__esModule", {
-    value: true
+  value: true
 });
 
-var _react = require("react");
+exports.default = function (info) {
+  return info.map(function (_ref, index) {
+    var prop = _ref.prop,
+        name = _ref.name;
+    return _react2.default.createElement(
+      'span',
+      {
+        key: String(index),
+        className: 'alertItem'
+      },
+      prop === 'duration' ? (0, _millisToMinutesAndSeconds2.default)(name) + 'min.' : name
+    );
+  });
+};
+
+var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _millisToMinutesAndSeconds = require('../../utils/millisToMinutesAndSeconds');
+
+var _millisToMinutesAndSeconds2 = _interopRequireDefault(_millisToMinutesAndSeconds);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function endCall(e) {
-    event.preventDefault();
-    console.log("End Call: ", e);
-    var number = document.getElementById("kaboodle").value;
-    alert("endCall: " + number);
+},{"../../utils/millisToMinutesAndSeconds":148,"react":94}],140:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _millisToMinutesAndSeconds = require('../../utils/millisToMinutesAndSeconds');
+
+var _millisToMinutesAndSeconds2 = _interopRequireDefault(_millisToMinutesAndSeconds);
+
+var _InfoSection = require('./InfoSection');
+
+var _InfoSection2 = _interopRequireDefault(_InfoSection);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var GenericClass = function (_React$Component) {
+  _inherits(GenericClass, _React$Component);
+
+  function GenericClass() {
+    var _ref;
+
+    var _temp, _this, _ret;
+
+    _classCallCheck(this, GenericClass);
+
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = GenericClass.__proto__ || Object.getPrototypeOf(GenericClass)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
+      acceptedCallTime: null,
+      notifications: _this.props.alert.notifications
+    }, _this.selectAlert = function (selected) {
+      return function (event) {
+        var notifications = _this.state.notifications;
+
+        var selectedCall = notifications[selected];
+        if (_this._isCallResolved(selectedCall)) return;
+
+        var updatedDuration = _this._makeUpdateCallInfo(selectedCall, 'duration', 1);
+        notifications[selected] = updatedDuration;
+
+        _this._handlerSelectAlertUI(event.target);
+        _this.setState({
+          acceptedCallTime: +new Date(),
+          notifications: notifications
+        });
+      };
+    }, _this.endCall = function (selected) {
+      return function (event) {
+        var _this$state = _this.state,
+            acceptedCallTime = _this$state.acceptedCallTime,
+            notifications = _this$state.notifications;
+
+        var selectedCall = notifications[selected];
+        var endCallTime = new Date();
+        var durationCall = +endCallTime - acceptedCallTime;
+
+        _this._handlerEndCallUI(event.target);
+
+        var updatedDuration = _this._makeUpdateCallInfo(selectedCall, 'duration', durationCall);
+        var updatedAttendedAndDuration = _this._makeUpdateCallInfo(updatedDuration, 'attended', String(endCallTime));
+        notifications[selected] = updatedAttendedAndDuration;
+
+        // [TODO] replace native alert on custom alert
+        alert('Duration Call: ' + (0, _millisToMinutesAndSeconds2.default)(durationCall) + 'min.');
+        _this.setState({ notifications: notifications });
+      };
+    }, _this._handlerSelectAlertUI = function (target) {
+      var notificationSection = getNotificationNode(target);
+      removeClassAlertActive(notificationSection);
+      addClassAlertSelected(notificationSection);
+    }, _this._handlerEndCallUI = function (target) {
+      var notificationSection = getNotificationNode(target);
+      removeClassAlertActive(notificationSection);
+      removeClassAlertSelected(notificationSection);
+    }, _this._makeUpdateCallInfo = function (infoArr, prop, name) {
+      return infoArr.map(function (info) {
+        return info.prop === prop ? _extends({}, info, { name: name }) : info;
+      });
+    }, _this._isCallResolved = function (selectedCall) {
+      return selectedCall.some(function (_ref2) {
+        var prop = _ref2.prop,
+            name = _ref2.name;
+        return prop === 'duration' && name;
+      });
+    }, _this._isCallAccepted = function (selectedCall) {
+      return selectedCall.some(function (_ref3) {
+        var prop = _ref3.prop,
+            name = _ref3.name;
+        return prop === 'duration' && name === 1;
+      });
+    }, _temp), _possibleConstructorReturn(_this, _ret);
+  }
+
+  _createClass(GenericClass, [{
+    key: 'render',
+    value: function render() {
+      var _this2 = this;
+
+      var notifications = this.state.notifications;
+
+
+      return notifications.map(function (top_level, index) {
+        return _react2.default.createElement(
+          'div',
+          {
+            key: String(index),
+            className: 'alert alert-active'
+          },
+          _react2.default.createElement(
+            'div',
+            { onClick: _this2.selectAlert(index) },
+            (0, _InfoSection2.default)(top_level)
+          ),
+          _this2._isCallAccepted(top_level) && _react2.default.createElement(
+            'button',
+            {
+              className: 'closeBtn',
+              onClick: _this2.endCall(index)
+            },
+            'Close Call'
+          )
+        );
+      });
+    }
+  }]);
+
+  return GenericClass;
+}(_react2.default.Component);
+
+function getNotificationNode(target) {
+  return target.closest('.alert');
 }
 
-function storeTime() {}
-function selectAlert(e) {
-    //event.preventDefault();
-    console.log("Selected: ", e.target);
-    e.target.classList.remove('alert');
-    e.target.classList.add('selected');
-    console.log("current notification timestamp: ", alert.notification[0].name);
-    console.log("current notification timestamp state: ", state.timeStamp);
-    var timestamp = alert.notification[0].name;
-    var currentTime = Data().toString;
-    var attendedTime = currentTime = timestamp;
-} //end selectAlert
+function removeClassAlertSelected(element) {
+  element.classList.remove('alert-selected');
+}
 
-function rowWrapper(row) {
-    var i = 0;
+function addClassAlertSelected(element) {
+  element.classList.add('alert-selected');
+}
 
-    return row.map(function (x) {
-        i++;
-        return _react2.default.createElement(
-            "span",
-            { key: i, className: "alertItem" },
-            x.name
-        );
-    });
-} //end rowWrapper
+function removeClassAlertActive(element) {
+  element.classList.remove('alert-active');
+}
 
-function GenericClass(props) {
-    var alert = props.alert;
-
-    console.log("Generic Class alert: ", alert.notification[0].name);
-    console.log("Generic Class notifications: ", alert.notifications);
-    var k = 0;
-    var alertNo = 0;
-
-    return alert.notifications.map(function (top_level) {
-        k++;
-        alertNo++;
-        return _react2.default.createElement(
-            "div",
-            { key: k, id: "kaboodle" },
-            _react2.default.createElement(
-                "p",
-                { key: k, className: "alert", onClick: selectAlert },
-                rowWrapper(top_level),
-                _react2.default.createElement(
-                    "span",
-                    null,
-                    _react2.default.createElement(
-                        "button",
-                        { className: "closeBtn", onClick: endCall },
-                        "Close Call"
-                    ),
-                    " "
-                )
-            )
-        );
-    });
-} //end GenericClass
-
-GenericClass.propTypes = {};
 exports.default = GenericClass;
 
-},{"react":94}],141:[function(require,module,exports){
+},{"../../utils/millisToMinutesAndSeconds":148,"./InfoSection":139,"react":94}],141:[function(require,module,exports){
 'use strict';
 
 var _react = require('react');
@@ -37135,4 +37137,20 @@ function getOpsData() {
   });
 }
 
-},{"axios":3}]},{},[141]);
+},{"axios":3}],148:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+exports.default = function (millisec) {
+  if (typeof millisec !== 'number') return 0;
+
+  var minutes = Math.floor(millisec / 60000);
+  var seconds = (millisec % 60000 / 1000).toFixed(0);
+  var convertedTime = minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
+  return convertedTime;
+};
+
+},{}]},{},[141]);
