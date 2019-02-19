@@ -12,8 +12,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <div>Master View Controller (MVC) v.0.0.2f</div>
-        <div>Currently using React {React.version}</div>
+        <div style={{fontFamily:"Arial"}}>Master View Controller (MVC) v.0.0.1</div>
         <br/><br/>
         <Login
           onLogin={event => {

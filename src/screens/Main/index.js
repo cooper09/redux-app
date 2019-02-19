@@ -31,17 +31,16 @@ function MainScreen({
   return (
     <div className='center option animated fadeIn mainScrn'>
       {/*Dummy view START*/}
-      VDM oMVC 0.0.1d
-      <button
+    {/*  <button
         className="btn"
         onClick={() => console.log("Close Screen")}
       >
         Logout
       </button>
-      <button className="alertBtn" onClick={getNewNotification}>
+     {/*  <button className="alertBtn" onClick={getNewNotification}>
         Update
       </button>
-      {/*Dummy view END*/}
+     Dummy view END*/}
 
       {/*Main screen*/}
       <main>
