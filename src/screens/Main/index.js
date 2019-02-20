@@ -39,12 +39,12 @@ function MainScreen({setNewNotification}) {
         Update
       </Button>
       {/*Dummy END*/}
-      <main>
+   {/*   <main>
         <NavigationPanel/>
         <Row>
           <LeftPanel/>
           <MainSection>
-            {/*inline style temporary only for visualisation layout*/}
+            // inline style temporary only for visualisation layout
             <Row style={{height: '200px'}}>
               <MiddlePanel/>
               <RightPanel/>
@@ -52,7 +52,8 @@ function MainScreen({setNewNotification}) {
             <AlertPanel/>
           </MainSection>
         </Row>
-      </main>
+      </main>*/}
+      <AlertPanel/>
     </div>
   )
 }

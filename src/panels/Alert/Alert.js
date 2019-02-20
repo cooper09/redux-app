@@ -10,7 +10,6 @@ import {
   millisToMinutesAndSeconds,
 } from 'root/utils/time';
 
-import TableCell from '@material-ui/core/TableCell';
 import CloseButton from './CloseButton';
 
 import {
@@ -24,7 +23,7 @@ function Alert({
                  selectedBuilding,
                  updateNotification,
                }) {
-  const [status, setStatus] = useState('active'); // || selected
+  const [callStatus, setCallStatus] = useState('active'); // || selected
 
   const getDurationCall = () => {
     const durationCall = notification.resolvedCallTime - notification.acceptedCallTime;
@@ -39,11 +38,22 @@ function Alert({
       acceptedCallTime: +new Date(),
     });
     selectedBuilding(buildingName);
-    setStatus('selected');
+    //setStatus('selected');
   };
 
+ /*
+ // pending selected
+ setCallStatus()
+   ${(status.acceptedCallTime === null) && `background: ${activeBackgroundColor};`}
+    ${(status.acceptedCallTime > 0 && status.resolvedCallTime === null)
+  */
   return (
-    <Row onDoubleClick={selectAlert(notification.building)} status={status}>
+    <Row onDoubleClick={selectAlert(notification.building)}
+         status={{
+           acceptedCallTime: notification.acceptedCallTime,
+           resolvedCallTime: notification.resolvedCallTime,
+         }}
+    >
       <Cell>{normalizeDate(notification.timestamp)}</Cell>
       <Cell>{notification.building}</Cell>
       <Cell>{notification.doorStation}</Cell>
@@ -52,11 +62,11 @@ function Alert({
       <Cell>{getDurationCall()}</Cell>
       <Cell>{notification.alarmType}</Cell>
       <Cell style={{minWidth: 90}}>
-        {status === 'selected' && (
+        {true && (
           <CloseButton
             selected={selected}
             notification={notification}
-            setStatus={setStatus}
+            setStatus={setCallStatus}
           />
         )}
       </Cell>
