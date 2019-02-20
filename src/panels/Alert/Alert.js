@@ -49,10 +49,8 @@ function Alert({
   */
   return (
     <Row onDoubleClick={selectAlert(notification.building)}
-         status={{
-           acceptedCallTime: notification.acceptedCallTime,
-           resolvedCallTime: notification.resolvedCallTime,
-         }}
+         pendingCall={status.acceptedCallTime === null}
+         selectedCall={status.acceptedCallTime > 0 && status.resolvedCallTime === null}
     >
       <Cell>{normalizeDate(notification.timestamp)}</Cell>
       <Cell>{notification.building}</Cell>
