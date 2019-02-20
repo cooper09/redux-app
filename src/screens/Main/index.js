@@ -2,55 +2,58 @@ import React from 'react';
 
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import {setNewNotification} from '../../redux-core/actions/notification';
+import {setNewNotification} from 'root/redux-core/actions/notification';
 
-import NavigationPanel from '../../panels/Navigation';
-import LeftPanel from '../../panels/Left';
-import MiddlePanel from '../../panels/Middle';
-import RightPanel from '../../panels/Right';
-import AlertPanel from '../../panels/Alert';
+import Button from '@material-ui/core/Button';
+import NavigationPanel from 'root/panels/Navigation';
+import LeftPanel from 'root/panels/Left';
+import MiddlePanel from 'root/panels/Middle';
+import RightPanel from 'root/panels/Right';
+import AlertPanel from 'root/panels/Alert';
+
+import {
+  Row,
+  MainSection,
+} from './style';
 
 const testData = {
   acceptedCallTime: null, //attended
   alarmType: 'VDM CALL',
-  building: '135 5th Street',
+  building: 'Building 003 - 82 Irving Place',
   doorStation: 'Front Door',
   operator: 'tbrooks',
   resolvedCallTime: null,
   timestamp: +new Date(),
 };
 
-function MainScreen({
-                      setNewNotification,
-                    }) {
-
-  const getNewNotification = () => {
-    setNewNotification(testData)
-  };
-
+function MainScreen({setNewNotification}) {
   return (
-    <div className='center option animated fadeIn mainScrn'>
-      {/*Dummy view START*/}
-      VDM oMVC 0.0.1d
-      <button
-        className="btn"
-        onClick={() => console.log("Close Screen")}
+    <div>
+      {/*Dummy START*/}
+      <Button
+        variant={'contained'}
+        color={'secondary'}
+        onClick={() => setNewNotification(testData)}
+        size={'small'}
       >
-        Logout
-      </button>
-      <button className="alertBtn" onClick={getNewNotification}>
         Update
-      </button>
-      {/*Dummy view END*/}
-
-      {/*Main screen*/}
-      <main>
-        {/*   <NavigationPanel/>
-        <LeftPanel/>
-        <MiddlePanel/>
-        <RightPanel/>*/}
-        <AlertPanel/>
-      </main>
+      </Button>
+      {/*Dummy END*/}
+  {/*    <main>
+        <NavigationPanel/>
+        <Row>
+          <LeftPanel/>
+          <MainSection>
+            // inline style temporary only for visualisation layout
+            <Row style={{height: '200px'}}>
+              <MiddlePanel/>
+              <RightPanel/>
+            </Row>
+            <AlertPanel/>
+          </MainSection>
+        </Row>
+      </main>*/}
+      <AlertPanel/>
     </div>
   )
 }

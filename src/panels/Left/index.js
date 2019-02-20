@@ -1,10 +1,16 @@
 import React from 'react';
 
+import SelectBuilding from 'root/components/SelectBuilding';
+
+import {
+  Container
+} from './style';
+
 function LeftPanel() {
   return (
-    <section>
-      <h1>Left Panel</h1>
-    </section>
+    <Container>
+      <SelectBuilding/>
+    </Container>
   )
 }
 

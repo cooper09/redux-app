@@ -1,98 +1,75 @@
-import React from 'react';
+import React, {useState} from 'react';
 
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import {updateNotification} from '../../redux-core/actions/notification';
+import {selectedBuilding} from 'root/redux-core/actions/building';
+import {updateNotification} from 'root/redux-core/actions/notification';
 
 import {
   normalizeDate,
   millisToMinutesAndSeconds,
-} from '../../utils/time';
+} from 'root/utils/time';
 
-import Button from '@material-ui/core/Button';
 import TableCell from '@material-ui/core/TableCell';
-import {Row} from './style';
+import CloseButton from './CloseButton';
 
-class Alert extends React.Component {
-  state = {
-    status: 'active', // or selected
-  };
+import {
+  Row,
+  Cell,
+} from './style';
 
-  getDurationCall = () => {
-    const {notification} = this.props;
+function Alert({
+                 selected,
+                 notification,
+                 selectedBuilding,
+                 updateNotification,
+               }) {
+  const [status, setStatus] = useState('active'); // || selected
+
+  const getDurationCall = () => {
     const durationCall = notification.resolvedCallTime - notification.acceptedCallTime;
     return millisToMinutesAndSeconds(durationCall);
   };
 
-  selectAlert = () => {
-    const {
-      selected,
-      notification: {acceptedCallTime},
-      updateNotification,
-    } = this.props;
+  const selectAlert = buildingName => () => {
+    const {acceptedCallTime} = notification;
     if (acceptedCallTime > 1) return;
 
     updateNotification(selected, {
       acceptedCallTime: +new Date(),
     });
-
-    this.setState({status: 'selected'});
+    selectedBuilding(buildingName);
+    setStatus('selected');
   };
 
-  endCall = () => {
-    const {
-      selected,
-      notification: {acceptedCallTime},
-      updateNotification,
-    } = this.props;
-    const resolvedCallTime = +new Date();
-    const durationCall = resolvedCallTime - acceptedCallTime;
-
-    updateNotification(selected, {
-      resolvedCallTime,
-    });
-
-    alert(`Duration Call: ${millisToMinutesAndSeconds(durationCall)}min.`);
-    this.setState({status: null});
-  };
-
-  render() {
-    const {notification,} = this.props;
-    const {status} = this.state;
-
-    return (
-      <Row onClick={this.selectAlert} status={status}>
-        <TableCell component='th' scope='row'>{normalizeDate(notification.timestamp)}</TableCell>
-        <TableCell align='right'>{notification.building}</TableCell>
-        <TableCell align='right'>{notification.doorStation}</TableCell>
-        <TableCell align='right'>{notification.operator}</TableCell>
-        <TableCell align='right'>{normalizeDate(notification.acceptedCallTime)}</TableCell>
-        <TableCell align='right'>{this.getDurationCall()}</TableCell>
-        <TableCell align='right'>{notification.alarmType}</TableCell>
-        <TableCell align='right'>
-          {status === 'selected' && (
-            < Button
-              variant='outlined'
-              color='primary'
-              size='small'
-              onClick={this.endCall}
-            >
-              Close
-            </Button>
-          )}
-        </TableCell>
-      </Row>
-    )
-  }
+  return (
+    <Row onDoubleClick={selectAlert(notification.building)} status={status}>
+      <Cell>{normalizeDate(notification.timestamp)}</Cell>
+      <Cell>{notification.building}</Cell>
+      <Cell>{notification.doorStation}</Cell>
+      <Cell>{notification.operator}</Cell>
+      <Cell>{normalizeDate(notification.acceptedCallTime)}</Cell>
+      <Cell>{getDurationCall()}</Cell>
+      <Cell>{notification.alarmType}</Cell>
+      <Cell style={{minWidth: 90}}>
+        {status === 'selected' && (
+          <CloseButton
+            selected={selected}
+            notification={notification}
+            setStatus={setStatus}
+          />
+        )}
+      </Cell>
+    </Row>
+  )
 }
 
-const mapStateToProps = ({
-                           notifications,
-                         }) => ({
+const mapStateToProps = ({notifications}) => ({
   notifications,
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
+  selectedBuilding,
   updateNotification,
 }, dispatch);
 

@@ -1,4 +1,21 @@
+export const promise = {
+  PENDING: '_PENDING',
+  REJECTED: '_REJECTED',
+  FULFILLED: '_FULFILLED',
+};
+
+export const buildings = {
+  GET_BUILDING_DATA: 'GET_BUILDING_DATA',
+  SET_SELECTED_BUILDING: 'SELECT_BUILDING',
+};
+
+export const operators = {
+  GET_OPERATORS_INFO: 'GET_OPERATORS_INFO',
+};
+
 export const notification = {
   SET_NEW_NOTIFICATION: 'SET_NEW_NOTIFICATION',
   UPDATE_NOTIFICATION: 'UPDATE_NOTIFICATION',
 };
+
+export const TOGGLE_SNACKBAR = 'TOGGLE_SNACKBAR';
