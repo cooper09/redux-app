@@ -1,3 +1,9 @@
 /.idea
 /public
 /node_modules
+.DS_Store
+.sass-cache/
+src/.DS_Store
+src/components/.DS_Store
+src/containers/
+src/utils/.DS_Store
