@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
@@ -23,7 +23,6 @@ function Alert({
                  selectedBuilding,
                  updateNotification,
                }) {
-  const [callStatus, setCallStatus] = useState('active'); // || selected
 
   const getDurationCall = () => {
     const durationCall = notification.resolvedCallTime - notification.acceptedCallTime;
@@ -38,19 +37,16 @@ function Alert({
       acceptedCallTime: +new Date(),
     });
     selectedBuilding(buildingName);
-    //setStatus('selected');
   };
 
- /*
- // pending selected
- setCallStatus()
-   ${(status.acceptedCallTime === null) && `background: ${activeBackgroundColor};`}
-    ${(status.acceptedCallTime > 0 && status.resolvedCallTime === null)
-  */
+  const isSelected = notification.acceptedCallTime > 0 && notification.resolvedCallTime === null;
+
   return (
     <Row onDoubleClick={selectAlert(notification.building)}
-         pendingCall={status.acceptedCallTime === null}
-         selectedCall={status.acceptedCallTime > 0 && status.resolvedCallTime === null}
+         status={{
+           pending: notification.acceptedCallTime === null,
+           selected: isSelected,
+         }}
     >
       <Cell>{normalizeDate(notification.timestamp)}</Cell>
       <Cell>{notification.building}</Cell>
@@ -60,11 +56,10 @@ function Alert({
       <Cell>{getDurationCall()}</Cell>
       <Cell>{notification.alarmType}</Cell>
       <Cell style={{minWidth: 90}}>
-        {true && (
+        {isSelected && (
           <CloseButton
             selected={selected}
             notification={notification}
-            setStatus={setCallStatus}
           />
         )}
       </Cell>

@@ -1,9 +1,5 @@
 import React from 'react';
 
-import {bindActionCreators} from 'redux';
-import {connect} from 'react-redux';
-import {setNewNotification} from 'root/redux-core/actions/notification';
-
 import Button from '@material-ui/core/Button';
 import NavigationPanel from 'root/panels/Navigation';
 import LeftPanel from 'root/panels/Left';
@@ -16,28 +12,9 @@ import {
   MainSection,
 } from './style';
 
-const testData = {
-  acceptedCallTime: null, //attended
-  alarmType: 'VDM CALL',
-  building: 'Building 003 - 82 Irving Place',
-  doorStation: 'Front Door',
-  operator: 'tbrooks',
-  resolvedCallTime: null,
-  timestamp: +new Date(),
-};
-
-function MainScreen({setNewNotification}) {
+function MainScreen() {
   return (
     <div>
-      {/*Dummy START*/}
-      <Button
-        variant={'contained'}
-        color={'secondary'}
-        onClick={() => setNewNotification(testData)}
-        size={'small'}
-      >
-        Update
-      </Button>
       {/*Dummy END*/}
    {/*   <main>
         <NavigationPanel/>
@@ -58,8 +35,4 @@ function MainScreen({setNewNotification}) {
   )
 }
 
-const mapDispatchToProps = dispatch => bindActionCreators({
-  setNewNotification,
-}, dispatch);
-
-export default connect(null, mapDispatchToProps)(MainScreen);
+export default MainScreen;

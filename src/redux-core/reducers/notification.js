@@ -34,7 +34,7 @@ export default function (state = initState, {type, payload}) {
       };
       newState[index] = newData;
 
-      /* Trick:
+      /* Trick sorting:
         first: all pending calls
         then: all accepted calls
         then: all resolved calls

@@ -21,15 +21,13 @@ export const Row = styled(TableRow)`
   
   && td {
      ${({status}) => status && css`
-        ${status === 'active' && `color: #fff;`}
+        ${status.pending && `color: #fff;`}
       `}
   };
-   // 3 pending red acceptedCallTime === 0 || resolvedCallTime === 0
-  // 1 accepted green acceptedCallTime > 0
-  // 2 resolved white acceptedCallTime > 0 || resolvedCallTime > 0
+
   ${({status}) => status && css`
-    ${(status.acceptedCallTime === null) && `background: ${activeBackgroundColor};`}
-    ${(status.acceptedCallTime > 0 && status.resolvedCallTime === null) && `background: ${selectedBackgroundColor};`}
+    ${status.pending && `background: ${activeBackgroundColor};`}
+    ${status.selected && `background: ${selectedBackgroundColor};`}
   `}
 `;
 
